@@ -7,7 +7,7 @@
     "eslintconfig",
     "lint"
   ],
-  "main": "default-config.js",
+  "main": "default.js",
   "directories": {
     "test": "tests"
   },
