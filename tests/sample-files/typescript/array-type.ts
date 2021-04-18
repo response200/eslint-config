@@ -1,0 +1,6 @@
+export const a: string[] = ['123', '123']
+export const b: readonly string[] = ['123', '123']
+export const c: Array<string> = ['123', '123']
+export const d: ReadonlyArray<string> = ['123', '123']
+export const e: Array<() => boolean> = [(): true => { return true }]
+export const f: ReadonlyArray<() => boolean> = [(): true => { return true }]

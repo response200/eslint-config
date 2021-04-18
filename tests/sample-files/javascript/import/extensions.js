@@ -1,0 +1,11 @@
+/* eslint-disable no-unused-vars, import/order */
+import { a } from 'src/foo.js'
+import { b } from 'src/foo.jsx'
+import { c } from 'src/foo.ts'
+import { d } from 'src/foo.tsx'
+import { e } from 'src/foo.d.ts'
+import { f } from 'src/foo.json'
+import { g } from 'src/foo.svg'
+import { h } from 'foo-package/foo-file'
+import { i } from 'foo-package/bar-file.js'
+import { j } from 'foo-package/baz-file.json'
