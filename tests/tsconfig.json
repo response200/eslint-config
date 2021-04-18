@@ -1,0 +1,6 @@
+{
+  "extends": "../tsconfig.json",
+  // Extend tsconfig.json in the project's root directory but reset `exclude`
+  // array. This allows the tests to lint files in tests/sample-files properly.
+  "exclude": []
+}
