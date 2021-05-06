@@ -8,6 +8,19 @@
     "lint"
   ],
   "main": "default.js",
+  "bin": {
+    "lint.sh": "scripts/lint.sh"
+  },
+  "files": [
+    "default.js",
+    "recommended.js",
+    "recommended-jsx.js",
+    "recommended-typescript.js",
+    "scripts/lint.sh",
+    "scripts/helpers/git.sh",
+    "LICENCE.md",
+    "README.md"
+  ],
   "directories": {
     "test": "tests"
   },
@@ -19,11 +32,15 @@
   "bugs": {
     "url": "https://github.com/response200/eslint-config/issues"
   },
+  "license": "BSD-3-Clause",
   "author": {
     "name": "Joel Posti",
     "url": "https://response200.pro"
   },
-  "license": "BSD-3-Clause",
+  "funding": {
+    "type": "individual",
+    "url": "https://paypal.me/joelposti"
+  },
   "peerDependencies": {
     "@typescript-eslint/eslint-plugin": ">=4.14",
     "eslint-config-standard": ">=16",
