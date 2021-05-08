@@ -1,0 +1,48 @@
+name: Check and test code
+on:
+  pull_request:
+  push:
+    branches-ignore:
+      - release-*
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci --cache ~/.npm --prefer-offline --ignore-scripts --no-fund
+      - run: scripts/lint.sh paths .
+
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    needs: lint # Run after lint so that lint job has an opportunity to fill npm cache.
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci --cache ~/.npm --prefer-offline --ignore-scripts --no-fund
+      - run: scripts/test.sh
+
+  type-check:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    needs: lint # Run after lint so that lint job has an opportunity to fill npm cache.
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci --cache ~/.npm --prefer-offline --ignore-scripts --no-fund
+      - run: scripts/type-check.sh
