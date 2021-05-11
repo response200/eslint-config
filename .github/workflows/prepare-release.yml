@@ -1,0 +1,24 @@
+name: Prepare release
+on:
+  workflow_dispatch:
+    inputs:
+      rev:
+        description: Git revision to prepare release from
+        required: true
+        default: master
+      version:
+        description: Version number of the release
+        required: true
+
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.rev }}
+          # scripts/ci/prepare-release.sh depends on git tags being fetched.
+          fetch-depth: 0
+      - run: scripts/ci/prepare-release.sh '${{ github.event.inputs.version }}' '${{ github.actor }}'
