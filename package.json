@@ -18,8 +18,10 @@
     "recommended-typescript.js",
     "scripts/lint.sh",
     "scripts/helpers/git.sh",
+    "CHANGELOG.md",
     "LICENCE.md",
-    "README.md"
+    "README.md",
+    "VERSIOHISTORIA.md"
   ],
   "directories": {
     "test": "tests"
