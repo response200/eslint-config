@@ -1,0 +1,84 @@
+name: Release
+on:
+  workflow_dispatch:
+    inputs:
+      rev:
+        description: Git revision to release
+        required: true
+        default: release-1.0.0
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.rev }}
+      - run: scripts/ci/audit.sh
+
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    needs: audit
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.rev }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci --cache ~/.npm --prefer-offline --ignore-scripts --no-fund
+      - run: scripts/lint.sh paths .
+
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    needs: lint # Run after lint so that audit job has an opportunity to fill npm cache.
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.rev }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci --cache ~/.npm --prefer-offline --ignore-scripts --no-fund
+      - run: scripts/test.sh
+
+  type-check:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    needs: lint # Run after lint so that audit job has an opportunity to fill npm cache.
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.rev }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
+      - run: npm ci --cache ~/.npm --prefer-offline --ignore-scripts --no-fund
+      - run: scripts/type-check.sh
+
+  release:
+    runs-on: ubuntu-latest
+    container:
+      image: response200/node-build:latest
+    needs: [test, type-check]
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.rev }}
+          # scripts/ci/release.sh depends on all git branches being fetched.
+          fetch-depth: 0
+      - run: scripts/ci/release.sh '${{ github.event.inputs.rev }}' '${{ github.actor }}'
+        env:
+          TOKEN_FOR_PUBLISHING_NPM_PACKAGES: ${{ secrets.TOKEN_FOR_PUBLISHING_NPM_PACKAGES }}
