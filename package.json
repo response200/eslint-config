@@ -1,6 +1,6 @@
 {
   "name": "@response200/eslint-config",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Strict ESLint rules for JavaScript/TypeScript/JSX projects in one convenient package",
   "keywords": [
     "eslint",
