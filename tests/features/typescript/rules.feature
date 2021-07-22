@@ -164,3 +164,21 @@ Feature: TypeScript rules
     When file is linted against recommended-typescript ruleset
     Then file should contain 1 lint error
     And line 3 should contain error "These overloads can be combined into one signature taking `string | number`."
+
+  Scenario: operator-linebreak rule
+    This test ensures that operator-linebreak rule works correctly for .ts
+    files, too. It was discovered that operator-linebreak rule that is defined
+    in recommended.js does not get applied to .ts files unless the rule is also
+    defined in recommended-typescript.js.
+
+    Given there is typescript/operator-linebreak.ts file
+    When file is linted against recommended-typescript ruleset
+    Then file should contain 8 lint errors
+    And line 3 should contain error "'?' should be placed at the beginning of the line."
+    And line 4 should contain error "':' should be placed at the beginning of the line."
+    And line 11 should contain error "'??' should be placed at the beginning of the line."
+    And line 17 should contain error "'&&' should be placed at the beginning of the line."
+    And line 23 should contain error "'||' should be placed at the beginning of the line."
+    And line 31 should contain error "'??=' should be placed at the beginning of the line."
+    And line 38 should contain error "'&&=' should be placed at the beginning of the line."
+    And line 45 should contain error "'||=' should be placed at the beginning of the line."

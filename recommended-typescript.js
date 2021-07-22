@@ -55,7 +55,13 @@ module.exports = {
     'object-curly-spacing': 'off',
     '@typescript-eslint/object-curly-spacing': ['error', 'always'],
     '@typescript-eslint/prefer-enum-initializers': 'error',
-    '@typescript-eslint/unified-signatures': 'error'
+    '@typescript-eslint/unified-signatures': 'error',
+
+    //
+    // Rules defined in recommended.js that for some reason need to be repeated
+    // here for them to be applied to .ts and .tsx files.
+    //
+    'operator-linebreak': ['error', 'before'],
   },
   overrides: [
     {
