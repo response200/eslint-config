@@ -24,12 +24,6 @@ module.exports = {
     }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'error',
-    '@typescript-eslint/member-ordering': ['error', {
-      default: {
-        memberTypes: ['signature', 'field', 'constructor', 'method'],
-        order: 'alphabetically'
-      }
-    }],
     '@typescript-eslint/naming-convention': ['error',
       {
         selector: 'default',
