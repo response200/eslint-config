@@ -14,6 +14,8 @@ module.exports = {
     // TypeScript plugin rules.
     //
     '@typescript-eslint/array-type': ['error', { default: 'array', readonly: 'array' }],
+    'comma-dangle': 'off',
+    '@typescript-eslint/comma-dangle': 'error',
     '@typescript-eslint/consistent-type-assertions': ['error', {
       assertionStyle: 'as',
       objectLiteralTypeAssertions: 'allow-as-parameter'

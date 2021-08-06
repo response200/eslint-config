@@ -10,6 +10,20 @@ Feature: TypeScript rules
     And line 5 should contain error "Array type using 'Array<T>' is forbidden. Use 'T[]' instead."
     And line 6 should contain error "Array type using 'Array<T>' is forbidden. Use 'T[]' instead."
 
+  Scenario: @typescript-eslint/comma-dangle rule
+    Given there is typescript/comma-dangle.ts file
+    When file is linted against recommended-typescript ruleset
+    Then file should contain 9 lint errors
+    And line 2 should contain error "Unexpected trailing comma."
+    And line 5 should contain error "Unexpected trailing comma."
+    And line 7 should contain error "Unexpected trailing comma."
+    And line 8 should contain error "Unexpected trailing comma."
+    And line 9 should contain error "Unexpected trailing comma."
+    And line 11 should contain error "Unexpected trailing comma."
+    And line 12 should contain error "Unexpected trailing comma."
+    And line 13 should contain error "Unexpected trailing comma."
+    And line 17 should contain error "Unexpected trailing comma."
+
   Scenario: @typescript-eslint/consistent-type-assertions rule
     Given there is typescript/consistent-type-assertions.ts file
     When file is linted against recommended-typescript ruleset
