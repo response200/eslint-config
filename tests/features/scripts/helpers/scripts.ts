@@ -18,10 +18,10 @@ export function isExecFileException (error: unknown): error is ExecFileException
   }
 
   return (
-    (typeof potentialExecFileException.code === 'number' ||
-      typeof potentialExecFileException.code === 'undefined') &&
-    typeof potentialExecFileException.stdout === 'string' &&
-    typeof potentialExecFileException.stderr === 'string'
+    (typeof potentialExecFileException.code === 'number'
+      || typeof potentialExecFileException.code === 'undefined')
+    && typeof potentialExecFileException.stdout === 'string'
+    && typeof potentialExecFileException.stderr === 'string'
   )
 }
 

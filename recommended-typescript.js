@@ -61,7 +61,7 @@ module.exports = {
     // Rules defined in recommended.js that for some reason need to be repeated
     // here for them to be applied to .ts and .tsx files.
     //
-    'operator-linebreak': ['error', 'before'],
+    'operator-linebreak': ['error', 'before']
   },
   overrides: [
     {
