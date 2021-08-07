@@ -1,3 +1,3 @@
 export enum Foo {
-  bar
+  Bar
 }

@@ -146,7 +146,7 @@ Feature: TypeScript rules
     Given there is typescript/prefer-enum-initializers.ts file
     When file is linted against recommended-typescript ruleset
     Then file should contain 1 lint error
-    And line 2 should contain error "The value of the member 'bar' should be explicitly defined"
+    And line 2 should contain error "The value of the member 'Bar' should be explicitly defined"
 
   Scenario: @typescript-eslint/prefer-function-type rule
     Given there is typescript/prefer-function-type.ts file

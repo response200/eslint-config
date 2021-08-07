@@ -8,7 +8,7 @@ const array = [123, 456, ]
 const object = { foo: 'abc', bar: 'def', }
 function func (foo, bar,) {}
 
-enum Enum { foo = 'abc', bar = 'def', }
+enum Enum { Foo = 'abc', Bar = 'def', }
 type GenericType<T1, T2,> = (foo: T1) => T2
 interface GenericInterface<T1, T2,> {
   foo: T1

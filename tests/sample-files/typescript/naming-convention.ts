@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/member-ordering */
+/* eslint-disable @typescript-eslint/consistent-type-definitions, @typescript-eslint/prefer-function-type */
 export const aBcd = 123
 export const aBCd = 123
 export const AbCd = 123
@@ -65,6 +65,82 @@ export enum M_NOP { foo = 'foo' }
 export enum _MnOp { foo = 'foo' }
 export enum MnOp_ { foo = 'foo' }
 export enum _MnOp_ { foo = 'foo' }
+
+export enum EnumMembers {
+  fooBar = 'foo',
+  foOBar = 'foo',
+  FooBar = 'foo',
+  FOOBar = 'foo',
+  foo_bar = 'foo',
+  FOO_BAR = 'foo',
+  _FooBar = 'foo',
+  FooBar_ = 'foo',
+  _FooBar_ = 'foo'
+}
+
+export type fooType = string
+export type foOType = string
+export type FooType = string
+export type FOOType = string
+export type foo_type = string
+export type FOO_TYPE = string
+export type _FooType = string
+export type FooType_ = string
+export type _FooType_ = string
+
+export type TypeProps = {
+  fooBar: string
+  foOBar: string
+  FooBar: string
+  FOOBar: string
+  foo_bar: string
+  FOO_BAR: string
+  _FooBar: string
+  FooBar_: string
+  _FooBar_: string
+}
+
+export type TypeParams1<typeParam> = { foo: typeParam }
+export type TypeParams2<typEParam> = { foo: typEParam }
+export type TypeParams3<TypeParam> = { foo: TypeParam }
+export type TypeParams4<TYPEParam> = { foo: TYPEParam }
+export type TypeParams5<type_param> = { foo: type_param }
+export type TypeParams6<TYPE_PARAM> = { foo: TYPE_PARAM }
+export type TypeParams7<_TypeParam> = { foo: _TypeParam }
+export type TypeParams8<TypeParam_> = { foo: TypeParam_ }
+export type TypeParams9<_TypeParam_> = { foo: _TypeParam_ }
+
+export interface fooInterface { (): void }
+export interface foOInterface { (): void }
+export interface FooInterface { (): void }
+export interface FOOInterface { (): void }
+export interface foo_interface { (): void }
+export interface FOO_INTERFACE { (): void }
+export interface _FooInterface { (): void }
+export interface FooInterface_ { (): void }
+export interface _FooInterface_ { (): void }
+
+export interface InterfaceProps {
+  fooBar: string
+  foOBar: string
+  FooBar: string
+  FOOBar: string
+  foo_bar: string
+  FOO_BAR: string
+  _FooBar: string
+  FooBar_: string
+  _FooBar_: string
+}
+
+export interface InterfaceTypeParams1<typeParam> { foo: typeParam }
+export interface InterfaceTypeParams2<typEParam> { foo: typEParam }
+export interface InterfaceTypeParams3<TypeParam> { foo: TypeParam }
+export interface InterfaceTypeParams4<TYPEParam> { foo: TYPEParam }
+export interface InterfaceTypeParams5<type_param> { foo: type_param }
+export interface InterfaceTypeParams6<TYPE_PARAM> { foo: TYPE_PARAM }
+export interface InterfaceTypeParams7<_TypeParam> { foo: _TypeParam }
+export interface InterfaceTypeParams8<TypeParam_> { foo: TypeParam_ }
+export interface InterfaceTypeParams9<_TypeParam_> { foo: _TypeParam_ }
 
 export const qRst = {
   bAar (): string { return 'bar' },

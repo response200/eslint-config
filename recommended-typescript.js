@@ -34,7 +34,7 @@ module.exports = {
         trailingUnderscore: 'forbid'
       },
       {
-        selector: 'typeLike',
+        selector: ['enumMember', 'typeLike'],
         format: ['StrictPascalCase'],
         leadingUnderscore: 'allow',
         trailingUnderscore: 'forbid'
