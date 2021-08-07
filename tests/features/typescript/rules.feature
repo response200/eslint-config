@@ -142,6 +142,51 @@ Feature: TypeScript rules
     And line 6 should contain error "Constraining the generic type `T` to `any` does nothing and is unnecessary."
     And line 10 should contain error "Constraining the generic type `T` to `unknown` does nothing and is unnecessary."
 
+  Scenario: @typescript-eslint/object-curly-spacing rule
+    Given there is typescript/object-curly-spacing.ts file
+    When file is linted against recommended-typescript ruleset
+    Then file should contain 40 lint errors
+    And line 2 should contain error "A space is required after '{'."
+    And line 2 should contain error "A space is required before '}'."
+    And line 4 should contain error "A space is required before '}'."
+    And line 5 should contain error "A space is required after '{'."
+    And line 14 should contain error "A space is required after '{'."
+    And line 14 should contain error "A space is required before '}'."
+    And line 16 should contain error "A space is required before '}'."
+    And line 17 should contain error "A space is required after '{'."
+    And line 24 should contain error "A space is required after '{'."
+    And line 24 should contain error "A space is required before '}'."
+    And line 26 should contain error "A space is required before '}'."
+    And line 27 should contain error "A space is required after '{'."
+    And line 34 should contain error "A space is required after '{'."
+    And line 34 should contain error "A space is required before '}'."
+    And line 35 should contain error "A space is required before '}'."
+    And line 37 should contain error "A space is required before '}'."
+    And line 38 should contain error "A space is required after '{'."
+    And line 42 should contain error "A space is required before '}'."
+    And line 49 should contain error "A space is required before '}'."
+    And line 51 should contain error "A space is required before '}'."
+    And line 53 should contain error "A space is required before '}'."
+    And line 56 should contain error "A space is required before '}'."
+    And line 62 should contain error "A space is required after '{'."
+    And line 62 should contain error "A space is required before '}'."
+    And line 64 should contain error "A space is required before '}'."
+    And line 65 should contain error "A space is required after '{'."
+    And line 72 should contain error "A space is required after '{'."
+    And line 72 should contain error "A space is required before '}'."
+    And line 74 should contain error "A space is required before '}'."
+    And line 75 should contain error "A space is required after '{'."
+    And line 82 should contain error "A space is required after '{'."
+    And line 82 should contain error "A space is required before '}'."
+    And line 83 should contain error "A space is required before '}'."
+    And line 85 should contain error "A space is required before '}'."
+    And line 86 should contain error "A space is required after '{'."
+    And line 90 should contain error "A space is required before '}'."
+    And line 106 should contain error "A space is required after '{'."
+    And line 106 should contain error "A space is required before '}'."
+    And line 109 should contain error "A space is required before '}'."
+    And line 110 should contain error "A space is required after '{'."
+
   Scenario: @typescript-eslint/prefer-enum-initializers rule
     Given there is typescript/prefer-enum-initializers.ts file
     When file is linted against recommended-typescript ruleset
