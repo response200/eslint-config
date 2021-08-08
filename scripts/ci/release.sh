@@ -37,6 +37,7 @@ chmod 0600 .npmrc
 cat > .npmrc <<EOF
 //registry.npmjs.org/:_authToken=$TOKEN_FOR_PUBLISHING_NPM_PACKAGES
 EOF
+unset TOKEN_FOR_PUBLISHING_NPM_PACKAGES
 
 (set -o xtrace; npm publish --access public --ignore-scripts)
 shred --remove .npmrc
