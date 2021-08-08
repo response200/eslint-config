@@ -14,6 +14,7 @@ module.exports = {
     // TypeScript plugin rules.
     //
     '@typescript-eslint/array-type': ['error', { default: 'array', readonly: 'array' }],
+    // @typescript-eslint/comma-dangle rule supersedes comma-dangle.
     'comma-dangle': 'off',
     '@typescript-eslint/comma-dangle': 'error',
     '@typescript-eslint/consistent-type-assertions': ['error', {
