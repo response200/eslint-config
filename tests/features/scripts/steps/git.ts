@@ -10,7 +10,7 @@ import { getFileLintResult } from 'tests/helpers/common'
 
 Given('git repository is created', async function (this: ScriptProps) {
   this.testGitRepo = await fs.mkdtemp(path.join(os.tmpdir(), '/'))
-  await execFile('git', ['init', this.testGitRepo])
+  await execFile('git', ['init', '--initial-branch', 'master', this.testGitRepo])
   await Promise.all([
     ...[
       'recommended.js', 'recommended-typescript.js', 'recommended-jsx.js',
