@@ -6,9 +6,9 @@ Feature: TypeScript rules
     When file is linted against recommended-typescript ruleset
     Then file should contain 4 lint errors
     And line 3 should contain error "Array type using 'Array<string>' is forbidden. Use 'string[]' instead."
-    And line 4 should contain error "Array type using 'Array<string>' is forbidden. Use 'string[]' instead."
+    And line 4 should contain error "Array type using 'ReadonlyArray<string>' is forbidden. Use 'readonly string[]' instead."
     And line 5 should contain error "Array type using 'Array<T>' is forbidden. Use 'T[]' instead."
-    And line 6 should contain error "Array type using 'Array<T>' is forbidden. Use 'T[]' instead."
+    And line 6 should contain error "Array type using 'ReadonlyArray<T>' is forbidden. Use 'readonly T[]' instead."
 
   Scenario: @typescript-eslint/comma-dangle rule
     Given there is typescript/comma-dangle.ts file
@@ -47,10 +47,10 @@ Feature: TypeScript rules
     Given there is typescript/consistent-type-imports.ts file
     When file is linted against recommended-typescript ruleset
     Then file should contain 6 lint errors
-    And line 3 should contain error "All imports in the declaration are only used as types. Use `import type`"
-    And line 5 should contain error 'Type import "constB" is used by decorator metadata'
-    And line 8 should contain error 'Import "TypeC" is only used as types'
-    And line 10 should contain error 'Type import "constD" is used by decorator metadata'
+    And line 3 should contain error "All imports in the declaration are only used as types. Use `import type`."
+    And line 5 should contain error 'Type import "constB" is used by decorator metadata.'
+    And line 8 should contain error 'Import "TypeC" is only used as types.'
+    And line 10 should contain error 'Type import "constD" is used by decorator metadata.'
     And line 17 should contain error "`import()` type annotations are forbidden."
     And line 18 should contain error "`import()` type annotations are forbidden."
 
@@ -103,7 +103,7 @@ Feature: TypeScript rules
     Given there is typescript/no-implicit-any-catch.ts file
     When file is linted against recommended-typescript ruleset
     Then file should contain 1 lint error
-    And line 3 should contain error "Implicit any in catch clause"
+    And line 3 should contain error "Implicit any in catch clause."
 
   Scenario: @typescript-eslint/no-inferrable-types rule
     Given there is typescript/no-inferrable-types.ts file
@@ -114,7 +114,7 @@ Feature: TypeScript rules
     Given there is typescript/no-invalid-void-type.ts file
     When file is linted against recommended-typescript ruleset
     Then file should contain 1 lint error
-    And line 1 should contain error "void is only valid as a return type or generic type variable"
+    And line 1 should contain error "void is only valid as a return type or generic type variable."
 
   Scenario: @typescript-eslint/no-misused-promises rule
     Given there is typescript/no-misused-promises.ts file
@@ -191,7 +191,7 @@ Feature: TypeScript rules
     Given there is typescript/prefer-enum-initializers.ts file
     When file is linted against recommended-typescript ruleset
     Then file should contain 1 lint error
-    And line 2 should contain error "The value of the member 'Bar' should be explicitly defined"
+    And line 2 should contain error "The value of the member 'Bar' should be explicitly defined."
 
   Scenario: @typescript-eslint/prefer-function-type rule
     Given there is typescript/prefer-function-type.ts file

@@ -1,4 +1,4 @@
-/* eslint-disable import/no-duplicates */
+/* eslint-disable import/no-duplicates, import/order */
 import { constA } from './helpers/consistent-type-imports'
 import { TypeA } from './helpers/consistent-type-imports'
 
