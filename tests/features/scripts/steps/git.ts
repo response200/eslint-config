@@ -3,7 +3,6 @@ import os from 'os'
 import path from 'path'
 import { Given, When, Then } from '@cucumber/cucumber'
 import { expect } from 'chai'
-import { copy } from 'fs-extra'
 import type { ScriptProps } from 'tests/features/scripts/helpers/scripts'
 import { execFile } from 'tests/features/scripts/helpers/scripts'
 import { getFileLintResult } from 'tests/helpers/common'
@@ -16,7 +15,9 @@ Given('git repository is created', async function (this: ScriptProps) {
       'recommended.js', 'recommended-typescript.js', 'recommended-jsx.js',
       '.eslintrc.js', 'tsconfig.json',
       'tests/.eslintrc.js', 'tests/tsconfig.json'
-    ].map(async (file) => { await copy(file, path.join(this.testGitRepo, file)) }),
+    ].map(async (file) => {
+      await fs.cp(file, path.join(this.testGitRepo, file), { recursive: true })
+    }),
     fs.symlink(
       path.join(process.cwd(), 'node_modules'),
       path.join(this.testGitRepo, 'node_modules'),
@@ -64,7 +65,7 @@ Then('line {int} of git file {word} should contain error {string}', function (th
 })
 
 async function addFileToGitRepo (gitRepo: string, filePath: string) {
-  await copy(filePath, path.join(gitRepo, filePath))
+  await fs.cp(filePath, path.join(gitRepo, filePath), { recursive: true })
   await execFile('git', ['add', filePath], { cwd: gitRepo })
   await execFile('git', [
     '-c',
