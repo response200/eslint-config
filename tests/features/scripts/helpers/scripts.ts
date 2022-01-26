@@ -28,7 +28,7 @@ export function isExecFileException (error: unknown): error is ExecFileException
 export type Script = 'scripts/lint.sh'
 export type ScriptProps = World & {
   args: string[]
-  exitCode?: number
+  exitCode?: number | undefined
   lintResults: ESLint.LintResult[]
   script: Script
   stderr: string
