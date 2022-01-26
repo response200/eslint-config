@@ -102,8 +102,7 @@ Feature: TypeScript rules
   Scenario: @typescript-eslint/no-implicit-any-catch rule
     Given there is typescript/no-implicit-any-catch.ts file
     When file is linted against recommended-typescript ruleset
-    Then file should contain 1 lint error
-    And line 3 should contain error "Implicit any in catch clause."
+    Then file should contain 0 lint errors
 
   Scenario: @typescript-eslint/no-inferrable-types rule
     Given there is typescript/no-inferrable-types.ts file

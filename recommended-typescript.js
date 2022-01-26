@@ -43,7 +43,6 @@ module.exports = {
     ],
     '@typescript-eslint/no-confusing-void-expression': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/no-implicit-any-catch': 'error',
     '@typescript-eslint/no-inferrable-types': 'off',
     '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: false }],
     '@typescript-eslint/no-unnecessary-qualifier': 'error',
