@@ -46,13 +46,14 @@ Feature: TypeScript rules
   Scenario: @typescript-eslint/consistent-type-imports rule
     Given there is typescript/consistent-type-imports.ts file
     When file is linted against recommended-typescript ruleset
-    Then file should contain 6 lint errors
+    Then file should contain 7 lint errors
     And line 3 should contain error "All imports in the declaration are only used as types. Use `import type`."
     And line 5 should contain error 'Type import "constB" is used by decorator metadata.'
     And line 8 should contain error 'Import "TypeC" is only used as types.'
     And line 10 should contain error 'Type import "constD" is used by decorator metadata.'
-    And line 17 should contain error "`import()` type annotations are forbidden."
-    And line 18 should contain error "`import()` type annotations are forbidden."
+    And line 15 should contain error 'Import "TypeE" is only used as types.'
+    And line 23 should contain error "`import()` type annotations are forbidden."
+    And line 24 should contain error "`import()` type annotations are forbidden."
 
   Scenario: @typescript-eslint/explicit-function-return-type rule
     Given there is typescript/explicit-function-return-type.ts file
