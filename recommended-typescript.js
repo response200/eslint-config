@@ -19,7 +19,7 @@ module.exports = {
     '@typescript-eslint/comma-dangle': 'error',
     '@typescript-eslint/consistent-type-assertions': ['error', {
       assertionStyle: 'as',
-      objectLiteralTypeAssertions: 'allow-as-parameter'
+      objectLiteralTypeAssertions: 'allow'
     }],
     '@typescript-eslint/consistent-type-imports': ['error', {
       prefer: 'type-imports',

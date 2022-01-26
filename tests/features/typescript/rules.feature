@@ -27,13 +27,12 @@ Feature: TypeScript rules
   Scenario: @typescript-eslint/consistent-type-assertions rule
     Given there is typescript/consistent-type-assertions.ts file
     When file is linted against recommended-typescript ruleset
-    Then file should contain 7 lint errors
+    Then file should contain 6 lint errors
     And line 3 should contain error "Use 'as string' instead of '<string>'."
     And line 3 should contain error "Use 'as unknown' instead of '<unknown>'."
     And line 10 should contain error "Use 'as Foo' instead of '<Foo>'."
     And line 10 should contain error "Use 'as unknown' instead of '<unknown>'."
     And line 17 should contain error "Use 'as Foo' instead of '<Foo>'."
-    And line 19 should contain error "Always prefer const x: T = { ... }."
     And line 20 should contain error "Use 'as Foo' instead of '<Foo>'."
 
   Scenario: @typescript-eslint/consistent-type-definitions rule
