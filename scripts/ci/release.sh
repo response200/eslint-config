@@ -17,8 +17,11 @@ git config user.email "$username@ci.invalid"
   #
 
   # Replace href attribute and text of README-en.md link in README.md.
+  # Npmjs.com prefixes anchor id attributes and custom id attributes with `user-content-`: 
+  # `<div id="README-en-GB">` becomes `<div id="user-content-README-en-GB">`.
+  # Thus the hashes in href attributes need to be prefixed with `#user-content-`.
   sed \
-    -r 's|<a href="README-en.md"([^>]+)>[^<]+</a>|<a href="#README-en-GB"\1>Scroll down to English documentation</a>|' \
+    -r 's|<a href="README-en.md"([^>]+)>[^<]+</a>|<a href="#user-content-README-en-GB"\1>Scroll down to English documentation</a>|' \
     -i README.md
 
   # Add an anchor ID for the main div element in README-en.md.
@@ -30,6 +33,10 @@ git config user.email "$username@ci.invalid"
     -e 's|\(# response200/eslint-config\)|\1 (English)|' \
     -e 's|\(\[[^]]\+\](#[^)]\+\)|\1-1|' \
     README-en.md >> README.md
+
+  sed \
+    -e 's|\(\[[^]]\+\](#\)\([^)]\+\)|\1user-content-\2|' \
+    -i README.md
 )
 
 touch .npmrc
