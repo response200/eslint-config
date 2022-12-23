@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/consistent-indexed-object-style */
+
 export interface A { foo: string }
 export type B = { foo: string }
 

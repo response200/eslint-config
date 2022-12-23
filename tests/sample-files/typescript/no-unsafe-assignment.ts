@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/consistent-indexed-object-style, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars */
 
 const a: any = 'abc'
 const b: string = 'def'

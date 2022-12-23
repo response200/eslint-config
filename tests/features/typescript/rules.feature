@@ -39,8 +39,8 @@ Feature: TypeScript rules
     Given there is typescript/consistent-type-definitions.ts file
     When file is linted against recommended-typescript ruleset
     Then file should contain 2 lint errors
-    And line 2 should contain error "Use an `interface` instead of a `type`."
-    And line 8 should contain error "Use an `interface` instead of a `type`."
+    And line 4 should contain error "Use an `interface` instead of a `type`."
+    And line 10 should contain error "Use an `interface` instead of a `type`."
 
   Scenario: @typescript-eslint/consistent-type-imports rule
     Given there is typescript/consistent-type-imports.ts file
