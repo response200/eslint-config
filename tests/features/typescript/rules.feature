@@ -92,6 +92,12 @@ Feature: TypeScript rules
     And line 5 should contain error "Returning a void expression from an arrow function shorthand is forbidden. Please add braces to the arrow function."
     And line 6 should contain error "Returning a void expression from an arrow function shorthand is forbidden. Please add braces to the arrow function."
 
+  Scenario: @typescript-eslint/no-duplicate-enum-values rule
+    Given there is typescript/no-duplicate-enum-values.ts file
+    When file is linted against recommended-typescript ruleset
+    Then file should contain 1 lint error
+    And line 3 should contain error "Duplicate enum member value foo."
+
   Scenario: @typescript-eslint/no-explicit-any rule
     Given there is typescript/no-explicit-any.ts file
     When file is linted against recommended-typescript ruleset
@@ -115,6 +121,15 @@ Feature: TypeScript rules
     And line 1 should contain error "void is only valid as a return type or generic type argument."
     And line 2 should contain error "void is not valid as a constituent in a union type"
 
+  Scenario: @typescript-eslint/no-meaningless-void-operator rule
+    Given there is typescript/no-meaningless-void-operator.ts file
+    When file is linted against recommended-typescript ruleset
+    Then file should contain 4 lint errors
+    And line 11 should contain error "void operator shouldn't be used on void; it should convey that a return value is being ignored"
+    And line 13 should contain error "void operator shouldn't be used on void; it should convey that a return value is being ignored"
+    And line 38 should contain error "void operator shouldn't be used on never; it should convey that a return value is being ignored"
+    And line 40 should contain error "void operator shouldn't be used on never; it should convey that a return value is being ignored"
+
   Scenario: @typescript-eslint/no-misused-promises rule
     Given there is typescript/no-misused-promises.ts file
     When file is linted against recommended-typescript ruleset
@@ -128,6 +143,13 @@ Feature: TypeScript rules
     And line 7 should contain error "Forbidden non-null assertion."
     And line 8 should contain error "Forbidden non-null assertion."
 
+  Scenario: @typescript-eslint/no-redundant-type-constituents rule
+    Given there is typescript/no-redundant-type-constituents.ts file
+    When file is linted against recommended-typescript ruleset
+    Then file should contain 2 lint errors
+    And line 1 should contain error "'unknown' overrides all other types in this union type."
+    And line 2 should contain error "'unknown' is overridden by other types in this intersection type."
+
   Scenario: @typescript-eslint/no-unnecessary-qualifier rule
     Given there is typescript/no-unnecessary-qualifier.ts file
     When file is linted against recommended-typescript ruleset
@@ -140,6 +162,12 @@ Feature: TypeScript rules
     Then file should contain 2 lint errors
     And line 6 should contain error "Constraining the generic type `T` to `any` does nothing and is unnecessary."
     And line 10 should contain error "Constraining the generic type `T` to `unknown` does nothing and is unnecessary."
+
+  Scenario: @typescript-eslint/no-useless-empty-export rule
+    Given there is typescript/no-useless-empty-export.ts file
+    When file is linted against recommended-typescript ruleset
+    Then file should contain 1 lint error
+    And line 2 should contain error "Empty export does nothing and can be removed."
 
   Scenario: @typescript-eslint/object-curly-spacing rule
     Given there is typescript/object-curly-spacing.ts file

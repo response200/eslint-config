@@ -67,15 +67,15 @@ export enum MnOp_ { foo = 'foo' }
 export enum _MnOp_ { foo = 'foo' }
 
 export enum EnumMembers {
-  fooBar = 'foo',
-  foOBar = 'foo',
-  FooBar = 'foo',
-  FOOBar = 'foo',
-  foo_bar = 'foo',
-  FOO_BAR = 'foo',
-  _FooBar = 'foo',
-  FooBar_ = 'foo',
-  _FooBar_ = 'foo'
+  fooBar = 'foo1',
+  foOBar = 'foo2',
+  FooBar = 'foo3',
+  FOOBar = 'foo4',
+  foo_bar = 'foo5',
+  FOO_BAR = 'foo6',
+  _FooBar = 'foo7',
+  FooBar_ = 'foo8',
+  _FooBar_ = 'foo9'
 }
 
 export type fooType = string

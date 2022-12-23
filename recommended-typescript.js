@@ -46,11 +46,18 @@ module.exports = {
       }
     ],
     '@typescript-eslint/no-confusing-void-expression': 'error',
+    '@typescript-eslint/no-duplicate-enum-values': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-meaningless-void-operator': ['error', {
+      checkNever: true
+    }],
     '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: false }],
+    '@typescript-eslint/no-redundant-type-constituents': 'error',
     '@typescript-eslint/no-unnecessary-qualifier': 'error',
     '@typescript-eslint/no-unnecessary-type-constraint': 'error',
+    '@typescript-eslint/no-unsafe-declaration-merging': 'error',
+    '@typescript-eslint/no-useless-empty-export': 'error',
     // @typescript-eslint/object-curly-spacing rule supersedes object-curly-spacing.
     'object-curly-spacing': 'off',
     '@typescript-eslint/object-curly-spacing': ['error', 'always'],

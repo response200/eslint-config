@@ -32,6 +32,13 @@ Feature: TypeScript rules
     And line 6 should contain error "Unsafe call of an `any` typed value."
     And line 7 should contain error "Unsafe call of an `any` typed value."
 
+  Scenario: @typescript-eslint/no-unsafe-declaration-merging rule
+    Given there is typescript/no-unsafe-declaration-merging.ts file
+    When file is linted against recommended-typescript ruleset
+    Then file should contain 2 lint errors
+    And line 1 should contain error "Unsafe declaration merging between classes and interfaces."
+    And line 5 should contain error "Unsafe declaration merging between classes and interfaces."
+
   Scenario: @typescript-eslint/no-unsafe-member-access rule
     Given there is typescript/no-unsafe-member-access.ts file
     When file is linted against recommended-typescript ruleset
