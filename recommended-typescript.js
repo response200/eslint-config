@@ -51,7 +51,6 @@ module.exports = {
     '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: false }],
     '@typescript-eslint/no-unnecessary-qualifier': 'error',
     '@typescript-eslint/no-unnecessary-type-constraint': 'error',
-    '@typescript-eslint/no-unsafe-argument': 'error',
     // @typescript-eslint/object-curly-spacing rule supersedes object-curly-spacing.
     'object-curly-spacing': 'off',
     '@typescript-eslint/object-curly-spacing': ['error', 'always'],
