@@ -16,7 +16,11 @@ module.exports = {
     '@typescript-eslint/array-type': ['error', { default: 'array', readonly: 'array' }],
     // @typescript-eslint/comma-dangle rule supersedes comma-dangle.
     'comma-dangle': 'off',
-    '@typescript-eslint/comma-dangle': 'error',
+    '@typescript-eslint/comma-dangle': ['error', {
+      enums: 'never',
+      generics: 'never',
+      tuples: 'never'
+    }],
     '@typescript-eslint/consistent-type-assertions': ['error', {
       assertionStyle: 'as',
       objectLiteralTypeAssertions: 'allow'
