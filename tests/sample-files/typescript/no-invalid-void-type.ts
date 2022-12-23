@@ -1,1 +1,2 @@
-export type T1 = number | string | void
+export type T1 = void
+export type T2 = number | string | void

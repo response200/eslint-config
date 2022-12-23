@@ -111,8 +111,9 @@ Feature: TypeScript rules
   Scenario: @typescript-eslint/no-invalid-void-type rule
     Given there is typescript/no-invalid-void-type.ts file
     When file is linted against recommended-typescript ruleset
-    Then file should contain 1 lint error
-    And line 1 should contain error "void is only valid as a return type or generic type variable."
+    Then file should contain 2 lint errors
+    And line 1 should contain error "void is only valid as a return type or generic type argument."
+    And line 2 should contain error "void is not valid as a constituent in a union type"
 
   Scenario: @typescript-eslint/no-misused-promises rule
     Given there is typescript/no-misused-promises.ts file
