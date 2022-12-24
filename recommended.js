@@ -49,6 +49,7 @@ module.exports = {
     //
     'promise/always-return': 'off',
     'promise/catch-or-return': 'off',
+    'promise/no-multiple-resolved': 'error',
     'promise/no-nesting': 'error',
     'promise/no-return-in-finally': 'error',
     'promise/valid-params': 'error'

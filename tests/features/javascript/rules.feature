@@ -116,6 +116,12 @@ Feature: JavaScript rules
     When file is linted against recommended ruleset
     Then file should pass linting
 
+  Scenario: promise/no-multiple-resolved rule
+    Given there is javascript/promise/no-multiple-resolved.js file
+    When file is linted against recommended ruleset
+    Then file should contain 1 lint error
+    And line 6 should contain error "Promise should not be resolved multiple times. Promise is potentially resolved on line 3."
+
   Scenario: promise/no-nesting rule
     Given there is javascript/promise/no-nesting.js file
     When file is linted against recommended ruleset
