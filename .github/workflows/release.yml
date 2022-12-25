@@ -13,7 +13,7 @@ jobs:
     container:
       image: response200/node-build:latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.rev }}
       - run: scripts/ci/audit.sh
@@ -24,10 +24,10 @@ jobs:
       image: response200/node-build:latest
     needs: audit
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.rev }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
@@ -40,10 +40,10 @@ jobs:
       image: response200/node-build:latest
     needs: lint # Run after lint so that audit job has an opportunity to fill npm cache.
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.rev }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
@@ -56,10 +56,10 @@ jobs:
       image: response200/node-build:latest
     needs: lint # Run after lint so that audit job has an opportunity to fill npm cache.
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.rev }}
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
@@ -74,7 +74,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.inputs.rev }}
           # scripts/ci/release.sh depends on all git branches being fetched.

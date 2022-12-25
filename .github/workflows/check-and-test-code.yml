@@ -11,8 +11,8 @@ jobs:
     container:
       image: response200/node-build:latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
@@ -25,8 +25,8 @@ jobs:
       image: response200/node-build:latest
     needs: lint # Run after lint so that lint job has an opportunity to fill npm cache.
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
@@ -39,8 +39,8 @@ jobs:
       image: response200/node-build:latest
     needs: lint # Run after lint so that lint job has an opportunity to fill npm cache.
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
