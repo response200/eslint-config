@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-set -o errexit
+set -o errexit -o nounset
 
 version="$1"
 username="$2"

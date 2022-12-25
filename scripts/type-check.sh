@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-set -o errexit
+set -o errexit -o nounset
 
 projectDir="$(cd "$(dirname "$0")" && git rev-parse --show-toplevel)"
 cd "$projectDir"
