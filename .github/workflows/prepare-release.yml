@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: response200/node-build:latest
+      options: --user root:root
     permissions:
       contents: write
     steps:
