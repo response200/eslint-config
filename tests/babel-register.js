@@ -2,11 +2,7 @@ require('@babel/register')({
   extensions: ['.ts'],
   plugins: [
     '@babel/plugin-transform-modules-commonjs',
-    ['babel-plugin-module-resolver', {
-      alias: {
-        tests: './tests'
-      }
-    }]
+    './tests/babel-plugin-module-resolver'
   ],
   presets: [
     '@babel/preset-typescript'

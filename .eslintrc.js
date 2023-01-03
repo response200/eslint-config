@@ -7,7 +7,12 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['./*.js', './tests/babel-register.js', './tests/.eslintrc.js'],
+      files: [
+        './*.js',
+        './tests/babel-plugin-module-resolver.js',
+        './tests/babel-register.js',
+        './tests/.eslintrc.js'
+      ],
       rules: {
         'import/no-commonjs': 'off'
       }
