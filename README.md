@@ -112,11 +112,11 @@ pois seuraavan rivin.
 
 ## Mainittavaa JSX-säännöistä ja Reactista
 
-`response200/eslint-config` sisältää JSX-sääntöjä ja `eslint-plugin-react`-
-moduuli asennetaan automaattisesti sen mukana. React-spesifejä sääntöjä ei
-kuitenkaan ole kytketty päälle.  `response200/eslint-config` pyrkii olemaan
-geneerinen lint-säännöstö, joka soveltuu kaikenlaisiin JSX-projekteihin ml.
-projektit, joissa käytetään jotain toista JSX-kirjastoa kuten esimerkiksi
+`response200/eslint-config` sisältää JSX-sääntöjä ja `eslint-plugin-react`-moduuli
+asennetaan automaattisesti sen mukana. React-spesifejä sääntöjä ei kuitenkaan
+ole kytketty päälle. `response200/eslint-config` pyrkii olemaan geneerinen
+lint-säännöstö, joka soveltuu kaikenlaisiin JSX-projekteihin ml. projektit,
+joissa käytetään jotain toista JSX-kirjastoa kuten esimerkiksi
 [Crankia](https://crank.js.org).
 
 Jos kuitenkin käytät Reactia, on suositeltua lisätä [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react),
