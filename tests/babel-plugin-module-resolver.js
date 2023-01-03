@@ -58,7 +58,6 @@ module.exports = ({ types }) => ({
       exit (programPath, state) {
         programPath.traverse(importVisitors, state)
       }
-
     }
   }
 })
