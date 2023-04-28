@@ -126,3 +126,13 @@ Feature: TypeScript rules
     And line 214 should contain error "Variable name `_VwXy_` must not have a trailing underscore."
     And line 215 should contain error "Class Method name `_bAar_` must not have a trailing underscore."
     And line 216 should contain error "Class Property name `_fOoz_` must not have a trailing underscore."
+
+  Scenario: @typescript-eslint/naming-convention rule quoted property names
+    Given there is typescript/naming-convention-of-quoted-property-names.ts file
+    When file is linted against recommended-typescript ruleset
+    And line 4 should contain error "Class Property name `Content_Type` must match one of the following formats: strictCamelCase, StrictPascalCase"
+    And line 9 should contain error "Enum Member name `Content_Type` must match one of the following formats: StrictPascalCase"
+    And line 14 should contain error "Type Property name `Content_Type` must match one of the following formats: strictCamelCase, StrictPascalCase"
+    And line 19 should contain error "Type Property name `Content_Type` must match one of the following formats: strictCamelCase, StrictPascalCase"
+    And line 24 should contain error "Object Literal Property name `Content_Type` must match one of the following formats: strictCamelCase, StrictPascalCase"
+    And line 29 should contain error "Class Property name `Content_Type` must match one of the following formats: strictCamelCase, StrictPascalCase"

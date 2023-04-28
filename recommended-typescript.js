@@ -38,6 +38,13 @@ module.exports = {
         leadingUnderscore: 'allow',
         trailingUnderscore: 'forbid'
       },
+      // If property name requires quotes, allow it to be any kind. This is
+      // needed to allow HTTP headers such as `'Content-Type': 'application/json'`.
+      {
+        selector: 'property',
+        format: null,
+        modifiers: ['requiresQuotes']
+      },
       {
         selector: ['enumMember', 'typeLike'],
         format: ['StrictPascalCase'],
