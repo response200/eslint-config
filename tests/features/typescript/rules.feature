@@ -45,11 +45,9 @@ Feature: TypeScript rules
   Scenario: @typescript-eslint/consistent-type-imports rule
     Given there is typescript/consistent-type-imports.ts file
     When file is linted against recommended-typescript ruleset
-    Then file should contain 6 lint errors
+    Then file should contain 4 lint errors
     And line 3 should contain error "All imports in the declaration are only used as types. Use `import type`."
-    And line 5 should contain error 'Type import "constB" is used by decorator metadata.'
-    And line 8 should contain error 'Import "TypeC" is only used as types.'
-    And line 10 should contain error 'Type import "constD" is used by decorator metadata.'
+    And line 8 should contain error 'Imports "TypeC" are only used as type.'
     And line 20 should contain error "`import()` type annotations are forbidden."
     And line 21 should contain error "`import()` type annotations are forbidden."
 
@@ -67,13 +65,20 @@ Feature: TypeScript rules
   Scenario: @typescript-eslint/member-delimiter-style rule
     Given there is typescript/member-delimiter-style.ts file
     When file is linted against recommended-typescript ruleset
-    Then file should contain 10 lint errors
+    Then file should contain 17 lint errors
+    And line 1 should contain error "Requires a space after '{'."
+    And line 1 should contain error "Requires a space before '}'."
+    And line 2 should contain error "Requires a space after '{'."
     And line 2 should contain error "Unexpected separator (,)."
     And line 4 should contain error "Unexpected separator (,)."
     And line 8 should contain error "Unexpected separator (,)."
     And line 9 should contain error "Unexpected separator (,)."
+    And line 11 should contain error "Requires a space after '{'."
     And line 11 should contain error "Expected a comma."
+    And line 11 should contain error "Requires a space before '}'."
+    And line 12 should contain error "Requires a space after '{'."
     And line 12 should contain error "Expected a comma."
+    And line 12 should contain error "Requires a space before '}'."
     And line 12 should contain error "Unexpected separator (;)."
     And line 14 should contain error "Unexpected separator (;)."
     And line 18 should contain error "Unexpected separator (;)."

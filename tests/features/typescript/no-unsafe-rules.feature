@@ -16,8 +16,8 @@ Feature: TypeScript rules
     Then file should contain 10 lint errors
     And line 7 should contain error "Unsafe assignment of an `any` value."
     And line 8 should contain error "Unsafe assignment of an `any` value."
-    And line 10 should contain error "Unsafe assignment of type any[] to a variable of type string[]."
-    And line 12 should contain error "Unsafe assignment of type any[] to a variable of type string[]."
+    And line 10 should contain error "Unsafe assignment of type `any[]` to a variable of type `string[]`."
+    And line 12 should contain error "Unsafe assignment of type `any[]` to a variable of type `string[]`."
     And line 15 should contain error "Unsafe assignment of an `any` value."
     And line 16 should contain error "Unsafe assignment of an `any` value."
     And line 17 should contain error "Unsafe assignment of an `any` value."
@@ -30,7 +30,7 @@ Feature: TypeScript rules
     When file is linted against recommended-typescript ruleset
     Then file should contain 2 lint errors
     And line 6 should contain error "Unsafe call of an `any` typed value."
-    And line 7 should contain error "Unsafe call of an `any` typed value."
+    And line 7 should contain error "Unsafe call of an `error` type typed value."
 
   Scenario: @typescript-eslint/no-unsafe-declaration-merging rule
     Given there is typescript/no-unsafe-declaration-merging.ts file
@@ -44,7 +44,7 @@ Feature: TypeScript rules
     When file is linted against recommended-typescript ruleset
     Then file should contain 2 lint errors
     And line 6 should contain error "Unsafe member access .split on an `any` value."
-    And line 7 should contain error "Unsafe member access .bar on an `any` value."
+    And line 7 should contain error "Unsafe member access .bar on an `error` typed value."
 
   Scenario: @typescript-eslint/no-unsafe-return rule
     Given there is typescript/no-unsafe-return.ts file

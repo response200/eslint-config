@@ -31,6 +31,8 @@ module.exports = {
     }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'error',
+    // @typescript-eslint/naming-convention rule supersedes camelcase.
+    camelcase: 'off',
     '@typescript-eslint/naming-convention': ['error',
       {
         selector: 'default',

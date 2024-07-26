@@ -7,7 +7,7 @@ Feature: TypeScript rules
     Then file should contain 3 lint errors
     And line 3 should contain error 'Do not use "@ts-nocheck" because it alters compilation errors.'
     And line 5 should contain error 'Use "@ts-expect-error" to ensure an error is actually being suppressed.'
-    And line 5 should contain error 'Do not use "@ts-ignore" because it alters compilation errors.'
+    And line 5 should contain error 'Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free.'
 
   Scenario: @typescript-eslint/ban-ts-comment rule (part 2/2)
     Given there is typescript/ban-ts-comment-2.ts file
