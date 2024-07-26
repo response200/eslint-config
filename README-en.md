@@ -11,8 +11,8 @@ JS, TS and JSX rulesets can be individually enabled or left disabled.
 but it also enables and tightens some additional rules.
 
 * [eslint/recommended](https://eslint.org/docs/rules)
+* [eslint-config-love](https://github.com/mightyiam/eslint-config-love)
 * [eslint-config-standard](https://github.com/standard/eslint-config-standard)
-* [eslint-config-standard-with-typescript](https://github.com/standard/eslint-config-standard-with-typescript)
 * [eslint-config-standard-jsx](https://github.com/standard/eslint-config-standard-jsx)
 * [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
 * [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
@@ -24,34 +24,11 @@ lint different file selections. Read more about it below [lint.sh](#lintsh).
 
 ## Installation
 
-### Npm 7 or newer
-
-If you use npm 7 or newer, run the following command:
+To install run the following command:
 
 ```sh
 npm install --save-dev @response200/eslint-config
 ```
-
-### Npm 6 or older
-
-If you use npm 6 or older, run the following more complicated command (npm 6 and
-older do not install peerDependencies automatically):
-
-```sh
-npm install --save-dev @response200/eslint-config \
-  eslint \
-  eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise \
-  eslint-config-standard-with-typescript @typescript-eslint/eslint-plugin typescript \
-  eslint-config-standard-jsx eslint-plugin-jsx-a11y eslint-plugin-react
-```
-
-If your project is not a TypeScript project, you can leave
-`eslint-config-standard-with-typescript`, `@typescript-eslint/eslint-plugin` and
-`typescript` modules out.
-
-If your project is not a JSX project, you can leave
-`eslint-config-standard-jsx`, `eslint-plugin-jsx-a11y` and `eslint-plugin-react`
-modules out.
 
 ## Configuration
 

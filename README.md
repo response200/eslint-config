@@ -14,8 +14,8 @@ säännöstöjä, joiden lisäksi paketti sisältää lisäsääntöjä ja joide
 kiristyksiä.
 
 * [eslint/recommended](https://eslint.org/docs/rules)
+* [eslint-config-love](https://github.com/mightyiam/eslint-config-love)
 * [eslint-config-standard](https://github.com/standard/eslint-config-standard)
-* [eslint-config-standard-with-typescript](https://github.com/standard/eslint-config-standard-with-typescript)
 * [eslint-config-standard-jsx](https://github.com/standard/eslint-config-standard-jsx)
 * [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
 * [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
@@ -27,34 +27,11 @@ tiedostovalikoimia. Lisää siitä alempana kohdassa [lint.sh](#lintsh).
 
 ## Asennus
 
-### Npm 7 tai uudempi
-
-Jos käytössäsi on npm-versio 7 tai uudempi, aja seuraava komento:
+Asentaaksesi aja seuraava komento:
 
 ```sh
 npm install --save-dev @response200/eslint-config
 ```
-
-### Npm 6 tai vanhempi
-
-Jos käytössäsi on npm-versio 6 tai vanhempi, aja seuraava monimutkaisempi
-komento (npm 6 ja vanhemmat eivät asenna peerDependencyjä automaattisesti):
-
-```sh
-npm install --save-dev @response200/eslint-config \
-  eslint \
-  eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise \
-  eslint-config-standard-with-typescript @typescript-eslint/eslint-plugin typescript \
-  eslint-config-standard-jsx eslint-plugin-jsx-a11y eslint-plugin-react
-```
-
-Jos et aio käyttää TypeScript-sääntöjä, voit jättää moduulit
-`eslint-config-standard-with-typescript`, `@typescript-eslint/eslint-plugin` ja
-`typescript` asentamatta.
-
-Jos et aio käyttää JSX-sääntöjä, voit jättää moduulit
-`eslint-config-standard-jsx`, `eslint-plugin-jsx-a11y` ja `eslint-plugin-react`
-asentamatta.
 
 ## Konfigurointi
 
