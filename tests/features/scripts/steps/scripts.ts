@@ -1,7 +1,7 @@
+import assert from 'assert/strict'
 import type { ExecFileOptions } from 'child_process'
 import path from 'path'
 import { Given, When, Then, setWorldConstructor } from '@cucumber/cucumber'
-import { expect } from 'chai'
 import type { Script, ScriptProps } from 'tests/features/scripts/helpers/scripts'
 import { execFile, isExecFileException } from 'tests/features/scripts/helpers/scripts'
 
@@ -44,11 +44,11 @@ When('script is run in the git repository', { timeout: 60 * 1000 }, async functi
 })
 
 Then('script should exit with code {int}', function (this: ScriptProps, exitCode: number) {
-  expect(this.exitCode).equal(exitCode)
+  assert.strictEqual(this.exitCode, exitCode)
 })
 
 Then('script should output', function (this: ScriptProps, output: string) {
-  expect(this.stdout).equal(output)
+  assert.strictEqual(this.stdout, output)
 })
 
 function parseLintResults (script: Script, scriptStdout: string): ScriptProps['lintResults'] {

@@ -1,8 +1,8 @@
+import assert from 'assert/strict'
 import { promises as fs } from 'fs'
 import os from 'os'
 import path from 'path'
 import { Given, When, Then } from '@cucumber/cucumber'
-import { expect } from 'chai'
 import type { ScriptProps } from 'tests/features/scripts/helpers/scripts'
 import { execFile } from 'tests/features/scripts/helpers/scripts'
 import { getFileLintResult } from 'tests/helpers/common'
@@ -51,17 +51,17 @@ When('git file {word} is staged', async function (this: ScriptProps, filePath: s
 
 Then('git file {word} should contain 1 lint error', function (this: ScriptProps, filePath: string) {
   const lintResult = getFileLintResult(this.lintResults, path.join(this.testGitRepo, filePath))
-  expect(lintResult.errorCount).equal(1)
+  assert.strictEqual(lintResult.errorCount, 1)
 })
 
 Then('git file {word} should contain {int} lint errors', function (this: ScriptProps, filePath: string, errorCount: number) {
   const lintResult = getFileLintResult(this.lintResults, path.join(this.testGitRepo, filePath))
-  expect(lintResult.errorCount).equal(errorCount)
+  assert.strictEqual(lintResult.errorCount, errorCount)
 })
 
 Then('line {int} of git file {word} should contain error {string}', function (this: ScriptProps, lineNumber: number, filePath: string, errorMessage: string) {
   const lintResult = getFileLintResult(this.lintResults, path.join(this.testGitRepo, filePath))
-  expect(lintResult.messages.map(({ severity, line, message }) => ({ severity, line, message }))).deep.include.members([{ severity: 2, line: lineNumber, message: errorMessage }])
+  assert(lintResult.messages.some(({ severity, line, message }) => severity === 2 && line === lineNumber && message === errorMessage))
 })
 
 async function addFileToGitRepo (gitRepo: string, filePath: string) {
