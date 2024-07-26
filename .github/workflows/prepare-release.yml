@@ -24,4 +24,10 @@ jobs:
           ref: ${{ github.event.inputs.rev }}
           # scripts/ci/prepare-release.sh depends on git tags being fetched.
           fetch-depth: 0
+      # Fix `fatal: detected dubious ownership in repository at '/__w/eslint-config/eslint-config'`
+      # error that occurs during this step. Since version 2.35.2 `git` has not
+      # liked that the git directory is owned by other user than the one
+      # performing git operations in the directory. Change the owner of the
+      # directory to be the same user as these steps are run as.
+      - run: chown root:root "$GITHUB_WORKSPACE"
       - run: scripts/ci/prepare-release.sh '${{ github.event.inputs.version }}' '${{ github.actor }}'
