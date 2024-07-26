@@ -14,7 +14,7 @@ jobs:
       image: response200/node-build:latest
       options: --user root:root
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.rev }}
       - run: scripts/ci/audit.sh
@@ -26,10 +26,10 @@ jobs:
       options: --user root:root
     needs: audit
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.rev }}
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
@@ -43,10 +43,10 @@ jobs:
       options: --user root:root
     needs: lint # Run after lint so that audit job has an opportunity to fill npm cache.
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.rev }}
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
@@ -60,10 +60,10 @@ jobs:
       options: --user root:root
     needs: lint # Run after lint so that audit job has an opportunity to fill npm cache.
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.rev }}
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
@@ -79,7 +79,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.rev }}
           # scripts/ci/release.sh depends on all git branches being fetched.
