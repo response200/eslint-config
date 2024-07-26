@@ -59,6 +59,9 @@ module.exports = {
       checkNever: true
     }],
     '@typescript-eslint/no-misused-promises': ['error', { checksVoidReturn: false }],
+    // Disable @typescript-eslint/non-nullable-type-assertion-style because it
+    // conflicts with @typescript-eslint/no-non-null-assertion.
+    '@typescript-eslint/non-nullable-type-assertion-style': 'off',
     '@typescript-eslint/no-redundant-type-constituents': 'error',
     '@typescript-eslint/no-unnecessary-qualifier': 'error',
     '@typescript-eslint/no-unsafe-declaration-merging': 'error',
