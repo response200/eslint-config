@@ -1,15 +1,26 @@
 #!/usr/bin/env sh
 
 scriptDir="$(dirname "$(realpath "$0")")"
-nodeModulesDir="$(cd "$scriptDir" && git rev-parse --show-toplevel)/node_modules"
-. "$scriptDir/helpers/git.sh"
+scriptName="$(basename "$0")"
 
+. "$scriptDir/helpers/git.sh"
+. "$scriptDir/helpers/paths.sh"
+
+gitDir="$(findDirInParentDirs .git "$scriptDir")"
+exitCode="$?"
+if [ "$exitCode" = 0 ]; then
+  gitWorkTree="$(dirname "$gitDir")"
+else
+  echo "Could not determine the project directory/git work tree. There is no .git directory in \`$scriptDir\` nor in any of its parent directories. $scriptName only works in a git work tree." 1>&2
+  exit 1
+fi
+
+nodeModulesDir="$gitWorkTree/node_modules"
 dryRun=0
 mode="$1"
 rev="$2"
 filesToLint=''
 filesToLintRegexp='\.(js|jsx|ts|tsx)$'
-scriptName="$(basename "$0")"
 IFS='
 '
 
@@ -45,12 +56,12 @@ fi
 if ! echo "$mode" | grep -E '^(paths|p|changed|c|staged|s|rev|r|branch|b)$' 1> /dev/null; then
   echo "Unknown option ‘$mode’." 1>&2
   help
-  exit 1
+  exit 2
 fi
 
 if echo "$mode" | grep -E '^(rev|r)$' 1> /dev/null && [ -z "$rev" ]; then
   echo 'No revision specified. Try HEAD~1..HEAD for example.' 1>&2
-  exit 2
+  exit 3
 fi
 
 case $mode in
