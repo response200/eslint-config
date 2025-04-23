@@ -1,9 +1,7 @@
 #!/usr/bin/env sh
 
 set -o errexit -o nounset
-
-projectDir="$(cd "$(dirname "$0")" && git rev-parse --show-toplevel)"
-cd "$projectDir"
+cd "$(dirname "$0")/.."
 
 ./node_modules/.bin/tsc \
   --project tsconfig.json \

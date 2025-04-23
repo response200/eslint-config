@@ -57,7 +57,6 @@ jobs:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci --cache ~/.npm --prefer-offline --ignore-scripts --no-fund
-      - run: chown root:root "$GITHUB_WORKSPACE"
       - run: scripts/test.sh
 
   type-check:
@@ -75,7 +74,6 @@ jobs:
           path: ~/.npm
           key: npm-dependencies-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci --cache ~/.npm --prefer-offline --ignore-scripts --no-fund
-      - run: chown root:root "$GITHUB_WORKSPACE"
       - run: scripts/type-check.sh
 
   release:
