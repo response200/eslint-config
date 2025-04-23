@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -o errexit -o nounset
+
 scriptDir="$(dirname "$(realpath "$0")")"
 scriptName="$(basename "$0")"
 
@@ -7,8 +9,7 @@ scriptName="$(basename "$0")"
 . "$scriptDir/helpers/paths.sh"
 
 gitDir="$(findDirInParentDirs .git "$scriptDir")"
-exitCode="$?"
-if [ "$exitCode" = 0 ]; then
+if [ ! -z "$gitDir" ]; then
   gitWorkTree="$(dirname "$gitDir")"
 else
   echo "Could not determine the project directory/git work tree. There is no .git directory in \`$scriptDir\` nor in any of its parent directories. $scriptName only works in a git work tree." 1>&2
@@ -17,16 +18,16 @@ fi
 
 nodeModulesDir="$gitWorkTree/node_modules"
 dryRun=0
-mode="$1"
-rev="$2"
+mode="${1:-}"
+rev="${2:-}"
 filesToLint=''
 filesToLintRegexp='\.(js|jsx|ts|tsx)$'
 IFS='
 '
 
-if [ "$2" = '--dry-run' ]; then
+if [ "${2:-}" = '--dry-run' ]; then
   dryRun=1
-  rev="$3"
+  rev="${3:-}"
   shift 1
 fi
 
@@ -41,7 +42,7 @@ Examples:
   $scriptName staged/s # Lint staged files.
   $scriptName rev/r <revision> # Lint files that have been changed after the specified revision.
   $scriptName rev/r HEAD~1..HEAD # Lint files that were changed in the latest commit.
-  $scriptName branch/b # Lint files that have been changed in this branch.
+  $scriptName rev/r main..HEAD # Lint files that have been changed in the current branch compared to the main branch.
   $scriptName <mode> --dry-run # Show the selection of files.
 
 Options:
@@ -53,14 +54,14 @@ if [ -z "$mode" ]; then
   exit 0
 fi
 
-if ! echo "$mode" | grep -E '^(paths|p|changed|c|staged|s|rev|r|branch|b)$' 1> /dev/null; then
+if ! echo "$mode" | grep -E '^(paths|p|changed|c|staged|s|rev|r)$' 1> /dev/null; then
   echo "Unknown option ‘$mode’." 1>&2
   help
   exit 2
 fi
 
 if echo "$mode" | grep -E '^(rev|r)$' 1> /dev/null && [ -z "$rev" ]; then
-  echo 'No revision specified. Try HEAD~1..HEAD for example.' 1>&2
+  echo 'No revision specified. Try HEAD~1..HEAD or main..HEAD for example.' 1>&2
   exit 3
 fi
 
@@ -71,8 +72,6 @@ case $mode in
     filesToLint="$(getStagedFiles "$filesToLintRegexp")";;
   rev|r)
     filesToLint="$(getFilesAfterRev "$rev" "$filesToLintRegexp")";;
-  branch|b)
-    filesToLint="$(getFilesAfterRev "$(getFirstCommitInBranch)~1..HEAD" "$filesToLintRegexp")";;
 esac
 
 if [ "$mode" != 'paths' ] && [ "$mode" != 'p' ] && [ -z "$filesToLint" ]; then

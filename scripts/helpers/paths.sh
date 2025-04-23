@@ -6,7 +6,7 @@ findDirInParentDirs() {
   elif [ "$dirToSearchFrom" != '/' ]; then
     findDirInParentDirs "$1" "$(dirname "$dirToSearchFrom")"
   else
-    return 1
+    return 0
   fi
 }
 

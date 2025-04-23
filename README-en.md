@@ -118,13 +118,12 @@ Then add the following lines to the `extends` array in `.eslintrc.js`:
 tool for linting various file selections quickly and easily in a git project.
 The tool is a helper for running eslint.
 
-The tool has 5 operational modes:
+The tool has 4 operational modes:
 
 * paths (lint specified files and/or directories)
 * changed (lint uncommitted changed files incl. staged files)
 * staged (lint staged files)
 * rev (lint files that have been changed after a specified revision)
-* branch (lint files that have been changed in the current branch)
 
 Lint.sh gathers a list of changed .js, .jsx, .ts and .tsx files by calling `git diff`.
 In `paths` mode the file list is user specified. The file list and possible
@@ -166,16 +165,16 @@ npx lint.sh rev HEAD~1..HEAD
 what git revisions can be used for.
 
 
-Example 6: lint files that have been changed in the current branch
+Example 6: lint files that have been changed in the current branch compared to the main branch
 ```sh
-npx lint.sh branch
+npx lint.sh rev main..HEAD
 ```
 
-**Tip:** configure your CI environment to run `node_modules/.bin/lint.sh branch`
+**Tip:** configure your CI environment to run `node_modules/.bin/lint.sh rev main..HEAD`
 for each pull request. If the files changed in the branch do not pass linting,
 lint.sh exits with a non-zero exit code which can be used to prevent merging of
-the branch to master. Automatic code quality monitoring and enforcement of
-coding conventions.
+the branch to the main branch. Automatic code quality monitoring and enforcement
+of coding conventions.
 
 **PRO TIP:** modes have abbreviated aliases p, c, s, r and b.
 

@@ -123,13 +123,12 @@ komentorivityökalu, jonka avulla erilaisten tiedostovalikoimien linttaaminen
 git-versiohallinnoidussa projektissa onnistuu nopeasti ja helposti. Työkalu on
 apuväline eslintin ajamiseen.
 
-Työkalulla on viisi toimintamoodia:
+Työkalulla on neljä toimintamoodia:
 
 * paths (linttaa määrätyt tiedostot ja hakemistot)
 * changed (linttaa committaamattomat muutetut tiedostot ml. staged-tilassa olevat)
 * staged (linttaa staged-tilassa olevat committaamattomat muutetut tiedostot)
 * rev (linttaa tiedostot, joita on muutettu määrätyn commitin jälkeen)
-* branch (linttaa aktiivisena olevan haaran muutetut tiedostot)
 
 Lint.sh kokoaa listan muutetuista .js, .jsx, .ts ja .tsx-tiedostoista `git diffin`
 avulla. `paths`-moodissa lista muodostuu käyttäjän määräämän mukaisesti. Lista
@@ -173,13 +172,13 @@ npx lint.sh rev HEAD~1..HEAD
 Katso `man 7 gitrevisions`, mihin kaikkeen git-revisioita voikaan käyttää.
 
 
-Esimerkki 6: linttaa aktiivisena olevan haaran muutetut tiedostot
+Esimerkki 6: linttaa tiedostot, jotka ovat muuttuneet suhteessa päähaaraan
 ```sh
-npx lint.sh branch
+npx lint.sh rev main..HEAD
 ```
 
-**Vinkki:** laita CI-ympäristösi suorittamaan `node_modules/.bin/lint.sh branch`
-pull requestin yhteydessä ja estä haaran/pull requestin liittäminen masteriin,
+**Vinkki:** laita CI-ympäristösi suorittamaan `node_modules/.bin/lint.sh rev main..HEAD`
+pull requestin yhteydessä ja estä haaran/pull requestin liittäminen päähaaraan,
 jos lint.sh palauttaa linttausvirheitä (paluukoodi muu kuin 0). Automatisoitu
 koodin laadun- ja koodauskäytäntöjen valvonta.
 

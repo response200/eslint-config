@@ -121,23 +121,25 @@ Feature: scripts/lint.sh
       tests/sample-files/scripts/subdirectory/bar.js
       """
 
-  Scenario: branch mode correctly lints files changed in active branch
+  Scenario: rev mode correctly lints files changed in active branch
     Given git repository is created
     And git branch is switched to test
     And script scripts/lint.sh
-    And argument branch
+    And argument rev
+    And argument master..HEAD
     When script is run in the git repository
     Then script should exit with code 1
     And files should contain 1 lint error
     And git file tests/sample-files/scripts/baz.js should contain 1 lint error
     And line 2 of git file tests/sample-files/scripts/baz.js should contain error "'baz2' is assigned a value but never used."
 
-  Scenario: branch mode is correctly dry run
+  Scenario: rev mode is correctly dry run against files in active branch
     Given git repository is created
     And git branch is switched to test
     And script scripts/lint.sh
-    And argument branch
+    And argument rev
     And argument --dry-run
+    And argument master..HEAD
     When script is run in the git repository
     Then script should exit with code 0
     And script should output
