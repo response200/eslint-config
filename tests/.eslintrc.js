@@ -1,5 +1,7 @@
+const path = require('path')
+
 module.exports = {
   parserOptions: {
-    project: 'tests/tsconfig.json'
+    project: path.join(__dirname, 'tsconfig.json')
   }
 }
