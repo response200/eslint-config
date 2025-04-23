@@ -65,6 +65,13 @@ if echo "$mode" | grep -E '^(rev|r)$' 1> /dev/null && [ -z "$rev" ]; then
   exit 3
 fi
 
+# Other modes than paths/p require the current working directory to be in
+# gitWorkTree. Otherwise `git diff` commands run by our git helper functions do
+# not return lists of files.
+if [ "$mode" != 'paths' ] && [ "$mode" != 'p' ]; then
+  cd "$gitWorkTree"
+fi
+
 case $mode in
   changed|c)
     filesToLint="$(getChangedFiles "$filesToLintRegexp")";;

@@ -1,5 +1,4 @@
 import assert from 'assert/strict'
-import type { ExecFileOptions } from 'child_process'
 import path from 'path'
 import { Given, When, Then, setWorldConstructor } from '@cucumber/cucumber'
 import type { Script, ScriptProps } from 'tests/features/scripts/helpers/scripts'
@@ -22,7 +21,16 @@ Given('argument {word}', function (this: ScriptProps, arg: string) {
 })
 
 When('script is run', { timeout: 60 * 1000 }, async function (this: ScriptProps) {
-  const { exitCode, stdout, stderr } = await runScript(this.script, this.args)
+  const { exitCode, stdout, stderr } = await runScript(
+    path.join(process.cwd(), this.script),
+    this.script === 'scripts/lint.sh'
+      ? [
+          ...this.args,
+          '--format', 'json',
+          '--no-ignore'
+        ]
+      : this.args
+  )
 
   this.exitCode = exitCode
   this.stdout = stdout
@@ -32,9 +40,14 @@ When('script is run', { timeout: 60 * 1000 }, async function (this: ScriptProps)
 
 When('script is run in the git repository', { timeout: 60 * 1000 }, async function (this: ScriptProps) {
   const { exitCode, stdout, stderr } = await runScript(
-    this.script,
-    this.args,
-    { cwd: this.testGitRepo }
+    path.join(this.testGitRepo, this.script),
+    this.script === 'scripts/lint.sh'
+      ? [
+          ...this.args,
+          '--format', 'json',
+          '--no-ignore'
+        ]
+      : this.args
   )
 
   this.exitCode = exitCode
@@ -62,23 +75,13 @@ function parseLintResults (script: Script, scriptStdout: string): ScriptProps['l
 }
 
 async function runScript (
-  script: Script,
-  args: string[] = [],
-  execFileOptions: ExecFileOptions = {}
+  script: string,
+  args: string[] = []
 ) {
   try {
-    if (script === 'scripts/lint.sh') {
-      args = [
-        ...args,
-        '--format', 'json',
-        '--no-ignore'
-      ]
-    }
-
     const { stdout, stderr } = await execFile(
-      path.join(process.cwd(), script),
-      args,
-      execFileOptions
+      script,
+      args
     )
 
     return {
