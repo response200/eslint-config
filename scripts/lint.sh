@@ -106,6 +106,6 @@ if [ "$dryRun" = 1 ]; then
   exit 0
 fi
 
-"$nodeModulesDir/.bin/eslint" \
+"${NODE_BIN:-node}" "$nodeModulesDir/.bin/eslint" \
   --ext js,jsx,ts,tsx \
   "$@" $filesToLint
