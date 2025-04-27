@@ -51,14 +51,14 @@
     "eslint-plugin-jsx-a11y": "^6.9.0"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.24.8",
-    "@babel/preset-typescript": "^7.24.7",
-    "@babel/register": "^7.24.6",
-    "@cucumber/cucumber": "^10.8.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
+    "@babel/register": "^7.27.1",
+    "@cucumber/cucumber": "^11.2.0",
     "@cucumber/pretty-formatter": "^1.0.1",
     "@types/eslint": "^9.6.0",
     "@types/node": "^20.14.12",
     "@typescript-eslint/parser": "^7.17.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.8.3"
   }
 }
