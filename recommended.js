@@ -1,65 +1,102 @@
-module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:promise/recommended',
-    'standard'
-  ],
-  plugins: [
-    'promise'
-  ],
-  reportUnusedDisableDirectives: true,
-  rules: {
-    //
-    // Eslint built-in rules.
-    //
-    'arrow-parens': ['error', 'always'],
-    'no-console': 'error',
-    'operator-linebreak': ['error', 'before'],
-    'require-await': 'error',
+const { configs } = require('@eslint/js')
+const neostandard = require('neostandard')
+const { plugins: neostandardPlugins } = require('neostandard')
 
-    //
-    // Import plugin rules.
-    //
-    // Import/extensions does not yet support `ignore` behaviour for all other
-    // extensions when `never` behaviour is defined for some extensions. So keep
-    // the rule unenabled for now.
-    // 'import/extensions': ['error', 'ignore', {
-    //   js: 'never',
-    //   jsx: 'never',
-    //   ts: 'never',
-    //   tsx: 'never'
-    // }],
-    'import/newline-after-import': 'error',
-    'import/no-amd': 'error',
-    'import/no-commonjs': 'error',
-    'import/no-default-export': 'error',
-    'import/no-deprecated': 'warn',
-    'import/no-namespace': 'error',
-    'import/no-self-import': 'error',
-    'import/no-unassigned-import': 'error',
-    // Import/no-unresolved needs configuration on the user's part. So disable it.
-    'import/no-unresolved': 'off',
-    'import/no-useless-path-segments': 'error',
-    'import/order': ['error', { alphabetize: { order: 'asc' } }],
+// Eslint-plugin-import-x/errors and eslint-plugin-import-x/warnings rulesets
+// need to be added to the config without `plugins` keys. Otherwise ESLint
+// outputs an error `ConfigError: Config "UserConfig[0][1] > import-x/errors": Key "plugins": Cannot redefine plugin "import-x"`.
+const { plugins: _importErrorsPlugins, ...importErrorsConfigs } = neostandardPlugins['import-x'].flatConfigs.errors
+const { plugins: _importWarningsPlugins, ...importWarningsConfigs } = neostandardPlugins['import-x'].flatConfigs.warnings
 
-    //
-    // Promise plugin rules.
-    //
-    'promise/always-return': 'off',
-    'promise/catch-or-return': 'off',
-    'promise/no-multiple-resolved': 'error',
-    'promise/no-nesting': 'error',
-    'promise/no-return-in-finally': 'error',
-    'promise/valid-params': 'error'
-  },
-  overrides: [
-    {
-      files: ['.eslintrc.js'],
-      rules: {
-        'import/no-commonjs': 'off'
-      }
+module.exports = [
+  configs.recommended,
+  importErrorsConfigs,
+  importWarningsConfigs,
+  neostandardPlugins.promise.configs['flat/recommended'],
+  ...neostandard({
+    // Instruct neostandard to not include JSX-specific rules. JSX-specific
+    // rules are enabled in recommended-jsx.js.
+    noJsx: true
+  }),
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: 'error'
+    },
+
+    rules: {
+      //
+      // Eslint built-in rules.
+      //
+      'no-console': 'error',
+      'require-await': 'error',
+
+      //
+      // @stylistic/eslint-plugin rules.
+      //
+      '@stylistic/arrow-parens': ['error', 'always'],
+      '@stylistic/comma-dangle': ['error', 'never'],
+      '@stylistic/operator-linebreak': ['error', 'before'],
+
+      //
+      // Eslint-plugin-import-x rules.
+      //
+      'import-x/newline-after-import': 'error',
+      'import-x/no-amd': 'error',
+      'import-x/no-commonjs': 'error',
+      'import-x/no-default-export': 'error',
+      'import-x/no-namespace': 'error',
+      'import-x/no-self-import': 'error',
+      'import-x/no-unassigned-import': 'error',
+      // Import-x/no-unresolved needs configuration on the user's part. So disable it.
+      'import-x/no-unresolved': 'off',
+      'import-x/no-useless-path-segments': 'error',
+      'import-x/order': ['error', { alphabetize: { order: 'asc' } }],
+
+      //
+      // Eslint-plugin-n rules.
+      //
+      'n/no-deprecated-api': 'error',
+
+      //
+      // Eslint-plugin-promise rules.
+      //
+      'promise/always-return': 'off',
+      'promise/catch-or-return': 'off',
+      'promise/no-multiple-resolved': 'error',
+      'promise/no-nesting': 'error',
+      'promise/no-return-in-finally': 'error',
+      'promise/valid-params': 'error',
+
+      //
+      // Rules that will likely be enabled or made stricter in the future.
+      //
+      'no-constant-binary-expression': 'off',
+      'no-empty-static-block': 'off',
+      'no-irregular-whitespace': ['error', {
+        skipComments: true,
+        skipJSXText: true,
+        skipRegExps: true,
+        skipStrings: true,
+        skipTemplates: true
+      }],
+      'no-unused-private-class-members': 'off',
+      'import-x/no-deprecated': 'warn',
+      'import-x/no-rename-default': 'off',
+
+      //
+      // Rules that will likely be disabled in the future.
+      //
+      'dot-notation': 'error',
+      'no-inner-declarations': 'error'
     }
-  ]
-}
+  },
+  {
+    files: [
+      'eslint.config.js',
+      'eslint.config.mjs'
+    ],
+    rules: {
+      'import-x/no-default-export': 'off'
+    }
+  }
+]

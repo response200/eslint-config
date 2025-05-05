@@ -7,12 +7,13 @@
     "eslintconfig",
     "lint"
   ],
-  "main": "default.js",
+  "main": "index.js",
   "bin": {
     "lint.sh": "scripts/lint.sh"
   },
   "files": [
     "default.js",
+    "index.js",
     "recommended.js",
     "recommended-jsx.js",
     "recommended-typescript.js",
