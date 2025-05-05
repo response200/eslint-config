@@ -44,11 +44,12 @@
     "url": "https://paypal.me/joelposti"
   },
   "peerDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.17.0",
-    "eslint-config-love": "^47.0.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-config-standard-jsx": "^11.0.0",
-    "eslint-plugin-jsx-a11y": "^6.9.0"
+    "eslint": ">=9"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.26.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "neostandard": "^0.12.1"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.27.1",
@@ -56,9 +57,7 @@
     "@babel/register": "^7.27.1",
     "@cucumber/cucumber": "^11.2.0",
     "@cucumber/pretty-formatter": "^1.0.1",
-    "@types/eslint": "^9.6.0",
     "@types/node": "^20.14.12",
-    "@typescript-eslint/parser": "^7.17.0",
     "typescript": "^5.8.3"
   }
 }
