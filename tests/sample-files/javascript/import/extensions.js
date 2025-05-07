@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars, import/order */
+/* eslint-disable no-unused-vars, import-x/order */
 import { a } from 'src/foo.js'
 import { b } from 'src/foo.jsx'
 import { c } from 'src/foo.ts'

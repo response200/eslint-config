@@ -1,4 +1,4 @@
-/* eslint-disable array-bracket-spacing, @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars */
+/* eslint-disable @stylistic/array-bracket-spacing, @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars */
 import { rm, rmdir, } from 'fs'
 
 const a = 123

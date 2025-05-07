@@ -1,4 +1,4 @@
-/* eslint-disable import/no-duplicates, object-curly-newline, object-property-newline, @typescript-eslint/block-spacing, @typescript-eslint/brace-style, @typescript-eslint/consistent-type-definitions, @typescript-eslint/member-delimiter-style, @typescript-eslint/no-unused-vars */
+/* eslint-disable import-x/no-duplicates, @stylistic/block-spacing, @stylistic/brace-style, @stylistic/member-delimiter-style, @stylistic/object-curly-newline, @stylistic/object-property-newline, @typescript-eslint/consistent-type-definitions, @typescript-eslint/no-unused-vars */
 import {rm as rm1, rmdir as rmdir1} from 'fs'
 import {
   rm as rm2, rmdir as rmdir2} from 'fs'

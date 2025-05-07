@@ -954,10 +954,7 @@
       "always"
     ],
     "import-x/newline-after-import": [
-      2,
-      {
-        "considerComments": true
-      }
+      2
     ],
     "import-x/no-amd": [
       2

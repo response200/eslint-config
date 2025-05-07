@@ -985,10 +985,7 @@
       "always"
     ],
     "import-x/newline-after-import": [
-      2,
-      {
-        "considerComments": true
-      }
+      2
     ],
     "import-x/no-amd": [
       2
@@ -1453,7 +1450,7 @@
       2
     ],
     "@typescript-eslint/no-unsafe-assignment": [
-      1
+      2
     ],
     "@typescript-eslint/no-unsafe-call": [
       2
@@ -1567,7 +1564,7 @@
       }
     ],
     "@typescript-eslint/no-confusing-non-null-assertion": [
-      2
+      0
     ],
     "no-empty-function": [
       0,
@@ -1576,7 +1573,7 @@
       }
     ],
     "@typescript-eslint/no-empty-function": [
-      0,
+      2,
       {
         "allow": []
       }
@@ -1650,6 +1647,9 @@
           "requireLast": false
         }
       }
+    ],
+    "@stylistic/type-annotation-spacing": [
+      2
     ],
     "@typescript-eslint/consistent-type-exports": [
       2

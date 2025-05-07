@@ -3,7 +3,7 @@ Feature: TypeScript rules
 
   Scenario: @typescript-eslint/naming-convention rule
     Given there is typescript/naming-convention.ts file
-    When file is linted against recommended-typescript ruleset
+    When file is linted
     Then file should contain 130 lint errors
     And line 3 should contain error "Variable name `aBCd` must match one of the following formats: strictCamelCase, StrictPascalCase"
     And line 5 should contain error "Variable name `ABCd` must match one of the following formats: strictCamelCase, StrictPascalCase"
@@ -129,7 +129,7 @@ Feature: TypeScript rules
 
   Scenario: @typescript-eslint/naming-convention rule quoted property names
     Given there is typescript/naming-convention-of-quoted-property-names.ts file
-    When file is linted against recommended-typescript ruleset
+    When file is linted
     And line 4 should contain error "Class Property name `Content_Type` must match one of the following formats: strictCamelCase, StrictPascalCase"
     And line 9 should contain error "Enum Member name `Content_Type` must match one of the following formats: StrictPascalCase"
     And line 14 should contain error "Type Property name `Content_Type` must match one of the following formats: strictCamelCase, StrictPascalCase"

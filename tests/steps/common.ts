@@ -3,7 +3,7 @@ import path from 'path'
 import type { World } from '@cucumber/cucumber'
 import { Given, When, Then } from '@cucumber/cucumber'
 import { ESLint } from 'eslint'
-import { getFileLintResult, getTotalLintErrorCount, getTotalLintWarningCount } from 'tests/helpers/common'
+import { getFileLintResult, getLineMessages, getTotalLintErrorCount, getTotalLintWarningCount } from 'tests/helpers/common'
 
 type LintProps = World & {
   fileToLint: string
@@ -14,12 +14,11 @@ Given('there is {word} file', function (this: LintProps, filePath: string): void
   this.fileToLint = path.resolve(`tests/sample-files/${filePath}`)
 })
 
-When('file is linted against {word} ruleset', async function (this: LintProps, rulesetFilename: string) {
+When('file is linted', async function (this: LintProps) {
   const eslint = new ESLint({
-    // .eslintignore of the repo should not be respected because files in
-    // tests/sample-files are linted in the tests.
-    ignore: false,
-    overrideConfigFile: `${rulesetFilename}.js`
+    // GlobalIgnores in eslint.config.mjs should not be respected because files
+    // in tests/sample-files are linted in the tests.
+    ignore: false
   })
   this.lintResults = await eslint.lintFiles(this.fileToLint)
 })
@@ -78,15 +77,39 @@ Then('file should pass linting', function (this: LintProps) {
 
 Then('line {int} should contain error {string}', function (this: LintProps, lineNumber: number, errorMessage: string) {
   const lintResult = getFileLintResult(this.lintResults, this.fileToLint)
-  assert(lintResult.messages.some(({ severity, line, message }) => severity === 2 && line === lineNumber && message === errorMessage))
+  const lineMessages = getLineMessages(lintResult, lineNumber)
+  assert(
+    lineMessages.some(({ severity, message }) => severity === 2 && message === errorMessage),
+    `Line ${lineNumber} did not contain expected error. ${
+      lineMessages.length > 0
+        ? `The line contained the following messages:\n${JSON.stringify(lineMessages, undefined, 2)}`
+        : 'The line contained no messages.'
+    }`
+  )
 })
 
 Then('line {int} should contain warning {string}', function (this: LintProps, lineNumber: number, warningMessage: string) {
   const lintResult = getFileLintResult(this.lintResults, this.fileToLint)
-  assert(lintResult.messages.some(({ severity, line, message }) => severity === 1 && line === lineNumber && message === warningMessage))
+  const lineMessages = getLineMessages(lintResult, lineNumber)
+  assert(
+    lineMessages.some(({ severity, message }) => severity === 1 && message === warningMessage),
+    `Line ${lineNumber} did not contain expected warning. ${
+      lineMessages.length > 0
+        ? `The line contained the following messages:\n${JSON.stringify(lineMessages, undefined, 2)}`
+        : 'The line contained no messages.'
+    }`
+  )
 })
 
 Then('line {int} of {word} should contain error {string}', function (this: LintProps, lineNumber: number, filePath: string, errorMessage: string) {
   const lintResult = getFileLintResult(this.lintResults, path.resolve(filePath))
-  assert(lintResult.messages.some(({ severity, line, message }) => severity === 2 && line === lineNumber && message === errorMessage))
+  const lineMessages = getLineMessages(lintResult, lineNumber)
+  assert(
+    lineMessages.some(({ severity, message }) => severity === 2 && message === errorMessage),
+    `Line ${lineNumber} of ${filePath} did not contain expected error. ${
+      lineMessages.length > 0
+        ? `The line contained the following messages:\n${JSON.stringify(lineMessages, undefined, 2)}`
+        : 'The line contained no messages.'
+    }`
+  )
 })

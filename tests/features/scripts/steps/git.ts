@@ -13,9 +13,9 @@ Given('git repository is created', async function (this: ScriptProps) {
   await Promise.all([
     ...[
       'recommended.js', 'recommended-typescript.js', 'recommended-jsx.js',
-      '.eslintrc.js', 'tsconfig.json',
+      'eslint.config.mjs', 'tsconfig.json',
       'scripts/lint.sh', 'scripts/helpers',
-      'tests/.eslintrc.js', 'tests/tsconfig.json'
+      'tests/tsconfig.json'
     ].map(async (file) => {
       await fs.cp(file, path.join(this.testGitRepo, file), { recursive: true })
     }),

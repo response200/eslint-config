@@ -26,7 +26,9 @@ When('config matching to file is calculated', async function (this: LintProps) {
     // in tests/sample-files are linted in the tests.
     ignore: false
   })
-  this.calculatedConfig = await eslint.calculateConfigForFile(this.fileToLint)
+  const calculatedConfig = await eslint.calculateConfigForFile(this.fileToLint) as unknown
+  assert(isConfig(calculatedConfig))
+  this.calculatedConfig = calculatedConfig
 })
 
 /**
@@ -55,3 +57,9 @@ Then('calculated config should match with config fixture', async function (this:
     fixture
   )
 })
+
+function isConfig (value: unknown): value is Linter.Config {
+  return typeof value === 'object' && value !== null && !Array.isArray(value)
+    && 'rules' in value && typeof value.rules === 'object'
+    && value.rules !== null && !Array.isArray(value.rules)
+}
