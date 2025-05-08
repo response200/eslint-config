@@ -2,28 +2,22 @@
 
 # response200/eslint-config
 
-Kireät ESLint-säännöt JavaScript/TypeScript/JSX-projekteihin yhdessä kätevässä
-paketissa. Linttaus pitää koodisi siistinä ja yhtenäisenä sekä auttaa välttämään
-sudenkuoppia ja suoranaisia virheitä.
+Kireät ESLint-säännöt JavaScript/TypeScript/JSX-projekteihin yhdessä kätevässä paketissa. Linttaus pitää koodisi siistinä ja yhtenäisenä sekä auttaa välttämään sudenkuoppia ja suoranaisia virheitä.
 
 <a href="README-en.md" hreflang="en-GB" rel="alternate" lang="en-GB">English documentation in README-en.md</a>
 
-JS-, TS- ja JSX-säännöt voi jokaisen erikseen kytkeä tai jättää kytkemättä
-päälle. `response200/eslint-config` käyttää pohjana seuraavia yleisiä
-säännöstöjä, joiden lisäksi paketti sisältää lisäsääntöjä ja joidenkin sääntöjen
-kiristyksiä.
+JS-, TS- ja JSX-säännöt voi jokaisen erikseen kytkeä tai jättää kytkemättä päälle. `response200/eslint-config` käyttää pohjana seuraavia säännöstöjä, joiden lisäksi paketti sisältää lisäsääntöjä ja joidenkin sääntöjen kiristyksiä.
 
-* [eslint/recommended](https://eslint.org/docs/rules)
-* [eslint-config-love](https://github.com/mightyiam/eslint-config-love)
-* [eslint-config-standard](https://github.com/standard/eslint-config-standard)
-* [eslint-config-standard-jsx](https://github.com/standard/eslint-config-standard-jsx)
-* [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin)
+* [eslint/recommended](https://eslint.org/docs/latest/rules)
+* [neostandard](https://github.com/neostandard/neostandard)
+* [eslint-plugin-import-x](https://github.com/un-ts/eslint-plugin-import-x)
+* [eslint-plugin-promise](https://github.com/eslint-community/eslint-plugin-promise)
+* [@stylistic/eslint-plugin](https://eslint.style/rules)
+* [@typescript-eslint/eslint-plugin](https://typescript-eslint.io/rules)
+* [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react)
 * [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
-* [eslint-plugin-import](https://github.com/benmosher/eslint-plugin-import)
-* [eslint-plugin-promise](https://github.com/xjamundx/eslint-plugin-promise)
 
-Paketin mukana tulee `lint.sh`-työkalu, jonka avulla on kätevä lintata erilaisia
-tiedostovalikoimia. Lisää siitä alempana kohdassa [lint.sh](#lintsh).
+Paketin mukana tulee `lint.sh`-työkalu, jonka avulla on kätevä lintata erilaisia tiedostovalikoimia. Lisää siitä alempana kohdassa [lint.sh](#lintsh).
 
 ## Asennus
 
@@ -35,93 +29,64 @@ npm install --save-dev @response200/eslint-config
 
 ## Konfigurointi
 
-Lisää `.eslintrc.js`-tiedostoon seuraavat konfiguraatiot:
+Lisää `eslint.config.js`-tiedostoon seuraavat konfiguraatiot:
 
 ```js
-const path = require('path')
+import { configs } from '@response200/eslint-config'
+import { defineConfig } from 'eslint/config'
 
-module.exports = {
-  extends: [
-    '@response200/eslint-config/recommended',
-    '@response200/eslint-config/recommended-jsx'
-  ],
-  overrides: [
-    {
-      files: ['*.ts', '*.tsx'],
-      extends: [
-        '@response200/eslint-config/recommended-typescript'
-      ]
+export default defineConfig([
+  {
+    extends: [
+      configs.recommended,
+      configs.recommendedJsx
+    ]
+  },
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    extends: [
+      configs.recommendedTypeScript
+    ],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname
+      }
     }
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: path.join(__dirname, 'tsconfig.json')
   }
-}
+])
 ```
 
-Jos et käytä TypeScriptiä tai halua käyttää siihen liittyviä sääntöjä, voit
-jättää pois seuraavat rivit.
+Jos et käytä TypeScriptiä tai halua käyttää siihen liittyviä sääntöjä, voit jättää pois seuraavat rivit.
 
 ```js
-const path = require('path')
-
-  overrides: [
-    {
-      files: ['*.ts', '*.tsx'],
-      extends: [
-        '@response200/eslint-config/recommended-typescript'
-      ]
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    extends: [
+      configs.recommendedTypeScript
+    ],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname
+      }
     }
-  ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    project: path.join(__dirname, 'tsconfig.json')
   }
 ```
 
-Jos et käytä JSX:ää tai halua käyttää siihen liittyviä sääntöjä, voit jättää
-pois seuraavan rivin.
+Jos et käytä JSX:ää tai halua käyttää siihen liittyviä sääntöjä, voit jättää pois seuraavan rivin.
 
 ```js
-    '@response200/eslint-config/recommended-jsx'
+      configs.recommendedJsx
 ```
 
 ## Mainittavaa JSX-säännöistä ja Reactista
 
-`response200/eslint-config` sisältää JSX-sääntöjä ja `eslint-plugin-react`-moduuli
-asennetaan automaattisesti sen mukana. React-spesifejä sääntöjä ei kuitenkaan
-ole kytketty päälle. `response200/eslint-config` pyrkii olemaan geneerinen
-lint-säännöstö, joka soveltuu kaikenlaisiin JSX-projekteihin ml. projektit,
-joissa käytetään jotain toista JSX-kirjastoa kuten esimerkiksi
-[Crankia](https://crank.js.org).
-
-Jos kuitenkin käytät Reactia, on suositeltua lisätä [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react),
-[eslint-plugin-react-hooks](https://github.com/facebook/react/tree/master/packages/eslint-plugin-react-hooks)
-ja [eslint-config-standard-react](https://github.com/standard/eslint-config-standard-react)
-säännöstöt. Aja seuraava komento asentaaksesi ne:
-
-```sh
-npm install --save-dev eslint-plugin-react-hooks eslint-config-standard-react
-```
-
-Lisää sitten seuraavat rivit `.eslintrc.js`-tiedoston `extends`-taulukkoon:
-
-```js
-  extends: [
-    ...
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'standard-react'
-  ],
-```
+`response200/eslint-config` sisältää JSX-sääntöjä ja `eslint-plugin-react`-moduuli asennetaan automaattisesti sen mukana. JSX-sääntöjen joukossa on React-spesifejä sääntöjä. Vaikka `response200/eslint-config` pyrkii olemaan geneerinen lint-säännöstö, voi jotain muuta JSX-kirjastoa kuin Reactia käyttävissä projekteissa joutua kytkemään React-spesifit säännöt pois päältä manuaalisesti.
 
 ## lint.sh
 
-`response200/eslint-config`-paketissa tulee mukana `lint.sh`. Se on kätevä
-komentorivityökalu, jonka avulla erilaisten tiedostovalikoimien linttaaminen
-git-versiohallinnoidussa projektissa onnistuu nopeasti ja helposti. Työkalu on
-apuväline eslintin ajamiseen.
+`response200/eslint-config`-paketissa tulee mukana `lint.sh`. Se on kätevä komentorivityökalu, jonka avulla erilaisten tiedostovalikoimien linttaaminen git-versiohallinnoidussa projektissa onnistuu nopeasti ja helposti. Työkalu on apuväline eslintin ajamiseen.
 
 Työkalulla on neljä toimintamoodia:
 
@@ -130,10 +95,7 @@ Työkalulla on neljä toimintamoodia:
 * staged (linttaa staged-tilassa olevat committaamattomat muutetut tiedostot)
 * rev (linttaa tiedostot, joita on muutettu määrätyn commitin jälkeen)
 
-Lint.sh kokoaa listan muutetuista .js, .jsx, .ts ja .tsx-tiedostoista `git diffin`
-avulla. `paths`-moodissa lista muodostuu käyttäjän määräämän mukaisesti. Lista
-ja muut lint.sh:lle mahdollisesti annetut komentoriviargumentit passataan
-eslintille.
+Lint.sh kokoaa listan muutetuista .js, .jsx, .ts ja .tsx-tiedostoista `git diffin` avulla. `paths`-moodissa lista muodostuu käyttäjän määräämän mukaisesti. Lista ja muut lint.sh:lle mahdollisesti annetut komentoriviargumentit passataan eslintille.
 
 Esimerkki 1: linttaa määrätyt tiedostot ja hakemistot
 ```sh
@@ -141,8 +103,7 @@ npx lint.sh paths foo.js bar.tsx directory/subdirectory
 ```
 
 
-Esimerkki 2: linttaa määrätyt tiedostot ja ohjeista eslint tekemään
-automaattiset korjaukset
+Esimerkki 2: linttaa määrätyt tiedostot ja ohjeista eslint tekemään automaattiset korjaukset
 ```sh
 npx lint.sh paths foo.js bar.tsx --fix
 ```
@@ -159,8 +120,7 @@ Esimerkki 4: linttaa staged-tilassa olevat committaamattomat muutetut tiedostot
 npx lint.sh staged
 ```
 
-**Vinkki:** skriptaa gitin pre-commit-koukku ajamaan `node_modules/.bin/lint.sh staged --fix`.
-Automatisoitu linttaus ja automaattinen virheiden korjaus commitin yhteydessä!
+**Vinkki:** skriptaa gitin pre-commit-koukku ajamaan `node_modules/.bin/lint.sh staged --fix`. Automatisoitu linttaus ja automaattinen virheiden korjaus commitin yhteydessä!
 
 
 Esimerkki 5: linttaa viimeisimmässä commitissa muutetut tiedostot
@@ -168,8 +128,7 @@ Esimerkki 5: linttaa viimeisimmässä commitissa muutetut tiedostot
 npx lint.sh rev HEAD~1..HEAD
 ```
 
-**Vinkki:** `rev`-moodi hyväksyy minkä tahansa git-revision argumentikseen.
-Katso `man 7 gitrevisions`, mihin kaikkeen git-revisioita voikaan käyttää.
+**Vinkki:** `rev`-moodi hyväksyy minkä tahansa git-revision argumentikseen. Katso `man 7 gitrevisions`, mihin kaikkeen git-revisioita voikaan käyttää.
 
 
 Esimerkki 6: linttaa tiedostot, jotka ovat muuttuneet suhteessa päähaaraan
@@ -177,31 +136,24 @@ Esimerkki 6: linttaa tiedostot, jotka ovat muuttuneet suhteessa päähaaraan
 npx lint.sh rev main..HEAD
 ```
 
-**Vinkki:** laita CI-ympäristösi suorittamaan `node_modules/.bin/lint.sh rev main..HEAD`
-pull requestin yhteydessä ja estä haaran/pull requestin liittäminen päähaaraan,
-jos lint.sh palauttaa linttausvirheitä (paluukoodi muu kuin 0). Automatisoitu
-koodin laadun- ja koodauskäytäntöjen valvonta.
+**Vinkki:** laita CI-ympäristösi suorittamaan `node_modules/.bin/lint.sh rev main..HEAD` pull requestin yhteydessä ja estä haaran/pull requestin liittäminen päähaaraan, jos lint.sh palauttaa linttausvirheitä (paluukoodi muu kuin 0). Automatisoitu koodin laadun- ja koodauskäytäntöjen valvonta.
 
-**Lisävinkki:** moodeista voi käyttää myös lyhenteitä p, c, s, r ja b.
+**Lisävinkki:** moodeista voi käyttää myös lyhenteitä p, c, s ja r.
 
 ## Yleisiä ongelmia
 
 ### Pisteellä alkavien tiedostojen linttaaminen epäonnistuu TypeScript-projektissa
 
-Kun TypeScript-projektissa yrittää lintata ESLintin `.eslintrc.js`-tiedostoa tai
-jotakin muuta pisteellä alkavaa tiedostoa, saattaa linttaus epäonnistua ja
-seuraava virhe tulee tulostetuksi:
+Kun TypeScript-projektissa yrittää lintata pisteellä alkavaa tiedostoa, saattaa linttaus epäonnistua ja seuraava virhe tulee tulostetuksi:
 
 ```
-/path/to/.eslintrc.js
+/path/to/.file.js
   0:0  error  Parsing error: "parserOptions.project" has been set for @typescript-eslint/parser.
-The file does not match your project config: .eslintrc.js.
+The file does not match your project config: .file.js.
 The file must be included in at least one of the projects provided
 ```
 
-Ongelma johtuu siitä, ettei `tsc` oletuksena käsittele pisteellä alkavia
-tiedostoja. Ongelman voi korjata lisäämällä `tsconfig.json`-tiedostoon seuraavat
-rivit:
+Ongelma johtuu siitä, ettei `tsc` oletuksena käsittele pisteellä alkavia tiedostoja. Ongelman voi korjata lisäämällä `tsconfig.json`-tiedostoon seuraavat rivit:
 
 ```json5
 {
@@ -216,8 +168,5 @@ rivit:
 
 ## Tue response200/eslint-configin kehitystä
 
-`response200/eslint-config` on ilmainen avoimen lähdekoodin projekti. Toivon, että
-se olisi hyödyksi. Jos haluat tukea sen kehitystä tai olet muuten vain
-avokätisellä tuulella, voit lahjoittaa sopivaksi katsomasi summan
-[PayPalilla](https://paypal.me/joelposti).
+`response200/eslint-config` on ilmainen avoimen lähdekoodin projekti. Toivon, että se olisi hyödyksi. Jos haluat tukea sen kehitystä tai olet muuten vain avokätisellä tuulella, voit lahjoittaa sopivaksi katsomasi summan [PayPalilla](https://paypal.me/joelposti).
 </div>
