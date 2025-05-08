@@ -1795,7 +1795,7 @@
       },
       "project": false,
       "projectService": true,
-      "tsconfigRootDir": "/home/joel/koodi/projektit/Response 200/eslint-config"
+      "tsconfigRootDir": "/path/to/eslint-config"
     },
     "globals": {
       "AggregateError": false,

@@ -28,6 +28,12 @@ When('config matching to file is calculated', async function (this: LintProps) {
   })
   const calculatedConfig = await eslint.calculateConfigForFile(this.fileToLint) as unknown
   assert(isConfig(calculatedConfig))
+  if (
+    typeof calculatedConfig.languageOptions?.parserOptions !== 'undefined'
+    && 'tsconfigRootDir' in calculatedConfig.languageOptions.parserOptions
+  ) {
+    calculatedConfig.languageOptions.parserOptions['tsconfigRootDir'] = '/path/to/eslint-config'
+  }
   this.calculatedConfig = calculatedConfig
 })
 
@@ -37,7 +43,9 @@ When('config matching to file is calculated', async function (this: LintProps) {
  *
  * ```sh
  * for extension in js jsx ts tsx d.ts; do
- *   ./scripts/lint.sh p --print-config "non-existent.$extension" > "tests/fixtures/config.$extension.json"
+ *   ./scripts/lint.sh p --print-config "non-existent.$extension" \
+ *     | sed -E 's|("tsconfigRootDir":).+(,)?$|\1 "/path/to/eslint-config"\2|' \
+ *     > "tests/fixtures/config.$extension.json"
  * done
  * ```
  */
