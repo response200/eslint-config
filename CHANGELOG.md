@@ -4,6 +4,11 @@
 
 <!-- New entries inserted automatically after this line -->
 
+## [4.0.1](https://github.com/response200/eslint-config/compare/v4.0.0...v4.0.1) (2025-05-09)
+
+### Korjaukset
+- Tiedosto `scripts/helpers/paths.sh` puuttui version 4.0.0 npm-paketista. Korjattu ongelma lisäämällä tiedosto package.json-tiedoston `files`-taulukkoon.
+
 ## [4.0.0](https://github.com/response200/eslint-config/compare/v3.0.0...v4.0.0) (2025-05-09)
 
 ### Breaking changes including lint rule changes
