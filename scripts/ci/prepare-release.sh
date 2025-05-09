@@ -18,7 +18,7 @@ previousTag="$(git describe --abbrev=0 --tags)"
 changelogEntry="
 ## [$version](https://github.com/response200/eslint-config/compare/$previousTag...v$version) ($(date --utc '+%Y-%m-%d'))
 
-$(git log --format='- %s' --no-merges --reverse "$previousTag..HEAD")"
+$(git log --format='- %B' --no-merges --reverse "$previousTag..HEAD")"
 
 (
   set -o xtrace
