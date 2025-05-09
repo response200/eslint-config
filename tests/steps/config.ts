@@ -28,10 +28,7 @@ When('config matching to file is calculated', async function (this: LintProps) {
   })
   const calculatedConfig = await eslint.calculateConfigForFile(this.fileToLint) as unknown
   assert(isConfig(calculatedConfig))
-  if (
-    typeof calculatedConfig.languageOptions?.parserOptions !== 'undefined'
-    && 'tsconfigRootDir' in calculatedConfig.languageOptions.parserOptions
-  ) {
+  if (typeof calculatedConfig.languageOptions?.parserOptions?.['tsconfigRootDir'] === 'string') {
     calculatedConfig.languageOptions.parserOptions['tsconfigRootDir'] = '/path/to/eslint-config'
   }
   this.calculatedConfig = calculatedConfig
