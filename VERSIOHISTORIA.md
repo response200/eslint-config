@@ -4,6 +4,49 @@
 
 <!-- New entries inserted automatically after this line -->
 
+## [4.0.0](https://github.com/response200/eslint-config/compare/v3.0.0...v4.0.0) (2025-05-09)
+
+### Rikkovat muutokset ml. muutokset linttaussääntöihin
+- Muutettu säännöstöt default, recommended, recommended-jsx ja recommended-typescript ESLint 9:n käyttämään ”flat config”-formaattiin. 
+
+- Pyrkimyksenä on ollut pitää edellä mainitut säännöstöt niin hyvin taaksepäin yhteensopivina versioon 3.0.0 nähden kuin mahdollista. Siirtyminen ESLint 9:ään, riippuvuuksien päivittäminen ja korvaaminen uusilla, muutokset eri sääntöjen heuristiikkaan ja muutokset joidenkin sääntöjen nimissä voi kuitenkin johtaa siihen, että linttaaminen tällä uudella 4.0.0-versiolla nostaa esiin uusia tai erinimisen säännön alla olevia sääntörikkomuksia projektissasi.
+
+- Edellä mainitut säännöstöt eivät ole enää yhteensopivia ESLint 8:n kanssa. ESLint 8:n mukainen `.eslintrc`, `.eslintrc.js` tai `.eslintrc.json`-konfiguraatiotiedosto täytyy korvata projektissasi ESLint 9:n mukaisella `eslint.config.js`, `eslint.config.cjs` tai `eslint.config.mjs`-konfiguraatiotiedostolla. README.md-tiedostossa on esimerkki konfiguraatiotiedostosta.
+
+- Poistettu `lint.sh`-työkalusta `branch`-toimintamoodi. Se oli käytännössä `rev`-toimintamoodi argumentilla `master..HEAD`. Nykyään on kuitenkin yleistynyt käytäntö, jossa päähaaran nimi on main. Näin ollen `branch`-toimintamoodin olettama siitä, että päähara on nimeltään master, ei ole enää hyvä. Korvaavana toimintamoodina voi käyttää edellä mainittua `rev`-toimintamoodia argumentilla `master..HEAD`, `main..HEAD` tai muulla vastaavalla päähaaraan viittaavalla argumentilla.
+
+### Uudet ominaisuudet
+- Lisätty `lint.sh`-työkaluun tuki tiedostopäätteille `.cjs`, `.mjs`, `.cts` ja `.mts`.
+
+- Otetaan `NODE_BIN`-ympäristömuuttuja huomioon `lint.sh`-työkalussa, kun se suorittaa eslintin `node`-prosessissa. Ympäristömuuttuja mahdollistaa `node`-prosessin käynnistämisen jostain tietystä polusta tai tietyillä komentoriviargumenteilla.
+
+- Lisätty `lint.sh`-työkaluun tuki suorittaa se git-koodisäilön ulkopuolisesta hakemistosta.
+
+### Ylläpitotoimenpiteet
+- Päivitetty riippuvuus eslint-plugin-jsx-a11y versiosta 6.9.0 versioon 6.10.2 ja siirretty se peer-riippuvuuksista tavallisiin riippuvuuksiin. Vaikuttaa siltä, että ESLint 9:n myötä käytännöksi on tullut laittaa riippuvuuksina olevat nk. `shareable configit` tavallisiin riippuvuuksiin.
+
+- Poistettu kaikki muut peer-riippuvuudet. Ne korvattiin lisäämällä neostandard tavallisiin riippuvuuksiin.
+  * Neostandard korvaa standardin ja eslint-config-standardin. Eslint-config-standardia ei enää ylläpidetä eikä se tue ESLint 9:ää.
+  * Eslint-config-standard-jsx-säännöstöä ei enää ylläpidetä eikä se tue ESLint 9:ää. Neostandard tarjoaa hyvin samanlaisen JSX-säännöstön.
+  * Eslint-config-love (aiemmin eslint-config-standard-with-typescript) poistettiin riippuvuuksista, koska sitä ei enää tarvita. Neostandard tarjoaa hyvin samanlaisen TypeScript-säännöstön.
+  * Poistettu @typescript-eslint/eslint-plugin riippuvuuksista. Se tulee asennetuksi muutenkin, koska se on transitiivinen riippuvuus neostandardin kautta.
+
+- Lisätty @eslint/js riippuvuuksiin. Se sisältää ESLint 9:n omat JavaScript-säännöstöt.
+
+- Lisätty eslint peer-riippuvuuksiin versiotarkenteella `>=9`. Tätä suositellaan [ESLintin shareable configeja käsittelevässä dokumentaatiossa](https://eslint.org/docs/latest/extend/shareable-configs#publishing-a-shareable-config).
+
+- Päivitetty kehitysriippuvuudet @babel/*, @cucumber/cucumber ja typescript niiden tuoreimpiin versioihin.
+
+- Korjattu haavoittuvuus https://github.com/advisories/GHSA-968p-4wvh-cqc8 (@babel/helpers) päivittämällä transitiivinen @babel/helpers-riippuvuus versiosta 7.20.7 versioon 7.27.0.
+
+- Korjattu haavoittuvuus https://github.com/advisories/GHSA-3xgq-45jj-v275 (cross-spawn) päivittämällä transitiivinen cross-spawn-riippuvuus versiosta 7.0.3 versioon 7.0.6.
+
+- Korjattu haavoittuvuus https://github.com/advisories/GHSA-952p-6rrq-rcjv (micromatch) päivittämällä transitiivinen micromatch-riippuvuus versiosta 4.0.7 versioon 4.0.8.
+
+- Korvattu `lint.sh`-työkalussa ja muissa skripteissä `git rev-parse --show-toplevel`-pohjainen aktiivisen hakemiston normalisointilogiikka toisenlaisilla logiikoilla. Tämä poistaa skripteistä kokonaan tai osittain riippuvuuden `git`-binääriin.
+
+- Päivitetty tekstit ja ohjeet tiedostoissa README.md ja README-en.md olemaan yhteensopivat ESLint 9:n kanssa ja linjassa @response200/eslint-configin nyt käyttämien säännöstöjen kanssa.
+
 ## [3.0.0](https://github.com/response200/eslint-config/compare/v2.0.0...v3.0.0) (2024-07-26)
 
 ### Muutokset linttaussääntöihin
