@@ -21,7 +21,7 @@ dryRun=0
 mode="${1:-}"
 rev="${2:-}"
 filesToLint=''
-filesToLintRegexp='\.(js|jsx|ts|tsx)$'
+filesToLintRegexp='\.(js|cjs|mjs|jsx|ts|cts|mts|tsx)$'
 IFS='
 '
 
