@@ -19,6 +19,7 @@
     "recommended-typescript.js",
     "scripts/lint.sh",
     "scripts/helpers/git.sh",
+    "scripts/helpers/paths.sh",
     "CHANGELOG.md",
     "LICENCE.md",
     "README.md",
