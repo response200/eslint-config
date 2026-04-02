@@ -6,13 +6,13 @@
 
 ## [4.0.1](https://github.com/response200/eslint-config/compare/v4.0.0...v4.0.1) (2025-05-09)
 
-### Fixes
-- The file `scripts/helpers/paths.sh` was missing from the 4.0.0 npm package. Fixed the issue by adding the file to `files` in package.json.
+### Korjaukset
+- Tiedosto `scripts/helpers/paths.sh` puuttui version 4.0.0 npm-paketista. Korjattu ongelma lisäämällä tiedosto package.json-tiedoston `files`-taulukkoon.
 
 ## [4.0.0](https://github.com/response200/eslint-config/compare/v3.0.0...v4.0.0) (2025-05-09)
 
 ### Rikkovat muutokset ml. muutokset linttaussääntöihin
-- Muutettu säännöstöt default, recommended, recommended-jsx ja recommended-typescript ESLint 9:n käyttämään ”flat config”-formaattiin. 
+- Muutettu säännöstöt default, recommended, recommended-jsx ja recommended-typescript ESLint 9:n käyttämään ”flat config”-formaattia.
 
 - Pyrkimyksenä on ollut pitää edellä mainitut säännöstöt niin hyvin taaksepäin yhteensopivina versioon 3.0.0 nähden kuin mahdollista. Siirtyminen ESLint 9:ään, riippuvuuksien päivittäminen ja korvaaminen uusilla, muutokset eri sääntöjen heuristiikkaan ja muutokset joidenkin sääntöjen nimissä voi kuitenkin johtaa siihen, että linttaaminen tällä uudella 4.0.0-versiolla nostaa esiin uusia tai erinimisen säännön alla olevia sääntörikkomuksia projektissasi.
 
